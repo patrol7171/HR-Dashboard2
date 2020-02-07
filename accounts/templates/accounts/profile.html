@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <div class="media">
+	<div class="media-body">
+	  <div class="row">
+		<div class="col-md-1 col-sm-6">
+			<img src="{{ user.profile.image.url }}" height='100' width='100'/>
+		</div>
+		<div class="col-md-11 col-sm-6 pt-md-5 pl-md-5">
+			<h3>{{ user.get_full_name }}</h3>
+		</div>
+	  </div>
+	  <i><p class="text-secondary border-bottom mb-4">{{ user.hr_group }} Team</p></i>	  
+	</div>
+  </div>
+  <form method="POST" enctype="multipart/form-data">
+	  {% csrf_token %}
+	  <fieldset class="form-group">
+		  <legend class="mb-2">Update Profile</legend>
+		  {{ p_form|crispy }}
+	  </fieldset>
+	  <div class="form-group">
+		<div class="row">
+			<div class="col-md-2 col-sm-6">
+				<button class="btn btn-primary" type="submit">Update</button>
+			</div>
+			<div class="col-md-10 col-sm-6 pt-md-2 pr-md-0">	
+				<h6><i><a href="{% url 'dashboard' %}"><span class="oi oi-arrow-circle-left"></span> Go Back</a></i></h6>
+			</div>
+		</div>		  
+	  </div>
+  </form>
+
+{% endblock %}

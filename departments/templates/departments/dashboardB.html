@@ -1,0 +1,219 @@
+{% extends 'base.html' %}
+
+{% block heading%}
+	<h6 class='mb-1'>{{ user.get_short_name }}'s Dashboard</h6>
+{% endblock %}
+
+{% block content %}
+	<div class="container-fluid" id="main">
+		<div class="row row-offcanvas row-offcanvas-left">
+			<!--Main col starts/-->
+			<div class="col main">
+			
+				<!--Alert Div/--> 				
+				<div class="alert alert-warning fade collapse" role="alert" id="myAlert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">×</span>
+						<span class="sr-only">Close</span>
+					</button>
+					<strong>Holy guacamole!</strong> This is an example of an alert.
+				</div>
+				<!--/Alert Div-->
+				
+				<!--START MANAGEMENT DASHBOARD INFO/-->	
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col py-2">
+							<div class="card text-white crd-bg-color1 h-100">
+								<div class="card-body card-bg-color1">
+									<div class="rotate">
+										<i class="fas fa-suitcase fa-4x"></i>
+									</div>
+									<h6 class="text-uppercase">TESTING 1 </h6>
+									<h1 class="display-4">10</h1>
+								</div>
+							</div>
+						</div>
+						<div class="col py-2">
+							<div class="card text-white card-bg-color2 h-100">
+								<div class="card-body card-bg-color2">
+									<div class="rotate">
+										<i class="fas fa-suitcase fa-4x"></i>
+									</div>
+									<h6 class="text-uppercase">TESTING 2 </h6>
+									<h1 class="display-4">100</h1>
+								</div>
+							</div>
+						</div>
+						<div class="col py-2">
+							<div class="card text-white card-bg-color3 h-100">
+								<div class="card-body card-bg-color3">
+									<div class="rotate">
+										<i class="fas fa-suitcase fa-4x"></i>
+									</div>
+									<h6 class="text-uppercase">TESTING 3 </h6>
+									<h1 class="display-4">100</h1>
+								</div>
+							</div>
+						</div>				
+						<div class="col py-2">
+							<div class="card text-white card-bg-color4 h-100">
+								<div class="card-body card-bg-color4">
+									<div class="rotate">
+										<i class="fas fa-suitcase fa-4x"></i>
+									</div>
+									<h6 class="text-uppercase">TESTING 4 </h6>
+									<h1 class="display-4">10</h1>
+								</div>
+							</div>
+						</div>						
+						<div class="col py-2">
+							<div class="card text-white card-bg-color5 h-100">
+								<div class="card-body card-bg-color5">
+									<div class="rotate">
+										<i class="fas fa-suitcase fa-4x"></i>
+									</div>
+									<h6 class="text-uppercase">TESTING 5 </h6>
+									<h1 class="display-4">100</h1>
+								</div>
+							</div>
+						</div>	
+					</div>						
+				</div>					
+				<!--/row-->
+				<hr>
+				<p class="text-uppercase text-center">Percentage of Open Cases Within SLA</p>
+				<div class="container-fluid">				
+					<div class="row">					
+						<div class="w-sm-20">
+							<div class="card card-inverse card-success text-center">
+								<div class="card-body">
+									<small class="text-uppercase">attrition & <br/>retention</small>
+									<div>
+										<canvas id="gaugeChart1" height="75" width="150"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="w-sm-20">							
+							<div class="card card-inverse card-success text-center">
+								<div class="card-body">
+									<small class="text-uppercase">compensation & <br/>benefits</small>
+									<div>
+										<canvas id="gaugeChart2" height="75" width="150"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>									
+						<div class="w-sm-20">							
+							<div class="card card-inverse card-success text-center">
+								<div class="card-body">
+									<small class="text-uppercase">employee <br/>relations</small>
+									<div>
+										<canvas id="gaugeChart3" height="75" width="150"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>		
+						<div class="w-sm-20">							
+							<div class="card card-inverse card-success text-center">
+								<div class="card-body">
+									<small class="text-uppercase">recruitment & <br/>selection</small>
+									<div>
+										<canvas id="gaugeChart4" height="75" width="150"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>									
+						<div class="w-sm-20">							
+							<div class="card card-inverse card-success text-center">
+								<div class="card-body">
+									<small class="text-uppercase">talent <br/>management</small>
+									<div>
+										<canvas id="gaugeChart5" height="75" width="150"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>						
+					</div>
+				</div>					
+				<!--/row-->				
+				<!--/End Dashboard Info-->	
+				
+			</div>
+			<!--/main col ends-->
+		</div>
+	</div>
+	<!--/.container-->
+{% endblock %}
+
+{% block gauge_script%}
+	var opts = {
+	  lines: 12,
+	  angle: 0,
+	  lineWidth: 0.4,
+	  pointer: {
+		length: 0.7,
+		strokeWidth: 0.045,
+		color: '#000000'
+	  },
+	  limitMax: 'false', 
+	  percentColors: [[0.0, "#a9d70b" ], [0.50, "#f9c802"], [1.0, "#ff0000"]],
+	  strokeColor: '#E0E0E0',
+	  generateGradient: true,
+	  staticLabels: {
+	  font: "10px sans-serif",
+	  labels: [0,20,40,60,80,100],
+	  color: "#000000",
+	  fractionDigits: 0 
+		},
+	  staticZones: [
+	   {strokeStyle: "#F03E3E", min: 0, max: 80}, // Red 
+	   {strokeStyle: "#FFDD00", min: 80, max: 90}, // Yellow
+	   {strokeStyle: "#30B32D", min: 90, max: 100}, // Green
+		],
+	  renderTicks: {
+		divisions: 5,
+		divWidth: 1.1,
+		divLength: 0.7,
+		divColor: "#333333",
+		subDivisions: 3,
+		subLength: 0.5,
+		subWidth: 0.6,
+		subColor: "#666666"
+	  },
+	};
+
+	var gaugeNums = {{ gaugeValues|safe }}
+
+	var target1 = document.getElementById('gaugeChart1');
+	var gauge1 = new Gauge(target1).setOptions(opts);
+	gauge1.maxValue = 100;
+	gauge1.animationSpeed = 32;
+	gauge1.set(gaugeNums[0]);
+
+	var target2 = document.getElementById('gaugeChart2');
+	var gauge2 = new Gauge(target2).setOptions(opts);
+	gauge2.maxValue = 100;
+	gauge2.animationSpeed = 32;
+	gauge2.set(gaugeNums[1]);
+
+	var target3 = document.getElementById('gaugeChart3');
+	var gauge3 = new Gauge(target3).setOptions(opts);
+	gauge3.maxValue = 100;
+	gauge3.animationSpeed = 32;
+	gauge3.set(gaugeNums[2]);
+
+	var target4 = document.getElementById('gaugeChart4');
+	var gauge4 = new Gauge(target4).setOptions(opts);
+	gauge4.maxValue = 100;
+	gauge4.animationSpeed = 32;
+	gauge4.set(gaugeNums[3]);
+	
+	var target5 = document.getElementById('gaugeChart5');
+	var gauge5 = new Gauge(target5).setOptions(opts);
+	gauge5.maxValue = 100;
+	gauge5.animationSpeed = 32;
+	gauge5.set(gaugeNums[4]);
+{% endblock %}
+

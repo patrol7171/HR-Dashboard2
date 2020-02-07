@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Dental Magic HR Portal2</title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    
+	<!-- Open Iconic CSS -->	
+    <link rel="stylesheet" href="{% static 'open-iconic/font/css/open-iconic-bootstrap.css' %}"/>
+    	
+    <!-- Font Awesome JS -->
+	<script src="https://kit.fontawesome.com/94481ffe3a.js"></script>
+
+    <!-- My Custom CSS -->
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.png' %}"/>	
+    <link href="{% static 'css/custom-style.css' %}" rel="stylesheet" />
+	<link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+
+	{% block bg-style %}{% endblock %}
+
+</head>
+
+<body>
+    <div class="wrapper"> <!-- Page Body Wrapper -->   
+        <nav id="sidebar"><!-- Sidebar Menu -->
+            <div class="sidebar-header">
+                <span class="logo1"><a href="{% url 'home' %}"><img src="{% static 'logo.png' %}" height='85%' width='95%'/></a></span>
+				<span class="logo2"><a href="{% url 'home' %}"><img src="{% static 'logo2.png' %}" height='90%' width='90%'/></a></span>
+            </div>
+            <ul class="list-unstyled components">
+                <h6 class='pb-3 pt-1 text-center'><span class="sidebarTitle px-2">HR DATA ANALYTICS</span></h6>	
+				{% if user.is_authenticated %}
+                 <li class="{{ dashboard_page }}"><a href="{% url 'dashboard' %}"><span class="oi oi-dashboard">&nbsp;</span><span class='title'> My Dashboard</span></a></li>			 
+					 {% if user.hr_group == 'Recruitment & Selection' %}
+					  <li class="{{ recruitment_page }}"><a href="{% url 'recruitment' %}"><span class="oi oi-people">&nbsp;</span><span class='title'> Recruitment</span></a></li>
+					 {% elif user.hr_group == 'Attrition & Retention' %}
+					  <li class="{{ attrition_page }}"><a href="{% url 'attrition' %}"><span class="oi oi-pie-chart">&nbsp;</span><span class='title'> Attrition & Retention</span></a></li>
+					 {% elif user.hr_group == 'Benefits & Compensation' %}
+					  <li class="{{ compensation_page }}"><a href="{% url 'compensation' %}"><span class="oi oi-dollar">&nbsp;</span><span class='title'> Compensation & Benefits</span></a></li>
+					 {% elif user.hr_group == 'Training & Development' %}
+					  <li class="{{ talent_page }}"><a href="{% url 'talent' %}"><span class="oi oi-star">&nbsp;</span><span class='title'> Talent Management</span></a></li>
+					 {% elif user.hr_group == 'Employee Relations' %}
+					  <li class="{{ relations_page }}"><a href="{% url 'relations' %}"><span class="oi oi-graph">&nbsp;</span><span class='title'> Employee Relations</span></a></li>
+					 {% else %}
+					  <li class="{{ recruitment_page }}"><a href="{% url 'recruitment' %}"><span class="oi oi-people">&nbsp;</span><span class='title'> Recruitment</span></a></li>
+					  <li class="{{ attrition_page }}"><a href="{% url 'attrition' %}"><span class="oi oi-pie-chart">&nbsp;</span><span class='title'> Attrition & Retention</span></a></li>
+					  <li class="{{ compensation_page }}"><a href="{% url 'compensation' %}"><span class="oi oi-dollar">&nbsp;</span><span class='title'> Compensation & Benefits</span></a></li>
+					  <li class="{{ talent_page }}"><a href="{% url 'talent' %}"><span class="oi oi-star">&nbsp;</span><span class='title'> Talent Management</span></a></li>
+					  <li class="{{ relations_page }}"><a href="{% url 'relations' %}"><span class="oi oi-graph">&nbsp;</span><span class='title'> Employee Relations</span></a></li>
+			          <li class="{{ demographics_page }}"><a href="{% url 'demographics' %}"><span class="oi oi-bar-chart">&nbsp;</span><span class='title'> Our Demographics</span></a></li>						  
+					  <li class="{{ locater_page }}"><a href="{% url 'locater' %}"><span class="oi oi-map-marker">&nbsp;</span><span class='title'> Employee/Site Locater</span></a></li>
+					  <li class="{{ policies_page }}"><a href="{% url 'policies' %}"><span class="oi oi-book">&nbsp;</span><span class='title'> Policies/Procedures</span></a></li>					  
+					 {% endif %}
+					 {% if user.access_level == 'Associate' %}
+					 <li id="jobAidMenu" class="{{ jobaid_menu }}">
+						<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><span class="oi oi-briefcase">&nbsp;</span><span class='title'> Job Aids</span></a>
+						<ul class="collapse list-unstyled" id="pageSubmenu">
+							<li class="{{ demographics_page }}"><a href="{% url 'demographics' %}"><span class="oi oi-bar-chart">&nbsp;</span><span class='title'> Demographics</span></a></li>					
+							<li class="{{ locater_page }}"><a href="{% url 'locater' %}"><span class="oi oi-map-marker">&nbsp;</span><span class='title'> Employee/Site Locater</span></a></li>
+							<li class="{{ policies_page }}"><a href="{% url 'policies' %}"><span class="oi oi-book">&nbsp;</span><span class='title'> Policies/Procedures</span></a></li>
+						</ul>
+					 </li>
+					 {% endif %}				
+			    {% else %}
+                 <li class="active"><a href="{% url 'home' %}"><span class="oi oi-home">&nbsp;</span> Home</a></li>				
+				{% endif %}
+            </ul>
+        </nav><!-- Sidebar Menu Ends -->
+		       
+        <div id="content"><!-- Page Content -->
+            <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+                <div class="container-fluid">
+                    <button type="button" id="sidebarCollapse" class="navbar-btn bg-transparent">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-align-justify"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+						  {% if user.is_authenticated %}
+                            <li class="nav-item active"><a class="nav-link" href="{% url 'profile' %}"><img class="rounded-circle account-img" src="{{ user.profile.image.url }}"></a></li>							
+                            <li class="nav-item pt-1"><a class="nav-link" href="{% url 'logout' %}"><span class="oi oi-account-logout">&nbsp;</span> Log Out</a></li>
+						  {% else %}
+							<li class="nav-item pt-1"><a class="nav-link" href="{% url 'login' %}"><span class="oi oi-account-login">&nbsp;</span> Log In</a></li>
+							<li class="nav-item pt-1"><a class="nav-link" href="" data-target="#myModal" data-toggle="modal"> About</a>
+						  {% endif %}
+                        </ul>
+                    </div>					
+                </div>
+            </nav>
+            <div id="page-header">
+			{% if user.is_authenticated %}
+				{% block heading %}
+				{% endblock %}	        
+			{% endif %}
+            </div>
+            <!-- <div class="container"> -->
+				{% block content %}
+				{% endblock %}
+			<!-- </div> -->
+        </div><!-- Page Content Ends--> 		
+    </div><!-- Page Body Wrapper Ends-->
+	
+    <footer class="footer container-fluid text-center">
+        <div class='py-3'>
+            <span class='small'>Dental Magic, Inc © {% now 'Y' %}</span> 
+            <br>
+            <span class='small'>Site Created by <a href="https://patrol7171.github.io" class="external" target="_blank">Rollins Web Design, Inc.</a></span>
+        </div>
+    </footer>	
+	{% block about_modal%}{% endblock %}
+
+    <!-- jQuery CDNs (Slim version = without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+		
+	<!-- Gauge JS -->
+	<script src="{% static 'js/gauge.min.js' %}"></script>
+	
+	<!-- Custom JS -->
+	<script src="{% static 'js/scripts.js' %}"></script>
+	
+    <script type="text/javascript">
+		$(document).ready(function () {
+			$('#sidebarCollapse').on('click', function () {
+				$('#sidebar').toggleClass('active');
+				$(this).toggleClass('active');
+			});
+			if ($('#pageSubmenu li').hasClass('active')) {
+			   $('#pageSubmenu').collapse('toggle');
+			   $('#pageSubmenu li:not(.active)').find("a").css('background', 'none');	  
+			}			
+		});
+		{% block gauge_script%}{% endblock %}		
+    </script>
+
+</body>
+
+</html>
+

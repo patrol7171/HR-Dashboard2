@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block bg-style %}
+	<style>
+		html {
+			height: 100% !important;
+		}
+		
+		#content {
+			height: 100% !important; 
+			background-image: url("/static/hr_home_pic.png") !important;
+			background-repeat: no-repeat !important;
+			background-size: cover !important;
+		}
+		
+		.bg-box{
+			background-color: rgba(14, 13, 13, 0.2);
+			border-radius: 50%;
+			line-height: 1; 
+			backdrop-filter: blur(5px);  
+			-webkit-backdrop-filter: blur(5px);
+			max-width: 100%;
+			max-height: 80%;
+			padding: 10vh 10vh 5vh;
+		}
+	</style>
+{% endblock %}
+
+{% block content %}
+	<div class='bg-box pt-5'>
+		<h4 id='home-header'>Welcome to the</h4> 
+		<h3 id='home-header' class='mb-3'>Human Resources Data Analytics Portal</h3> 	
+		<h5 id='home-header' class='mb-2'>You are not logged in. Click the button below or link above to get started.</h5>
+		<p class='text-center pt-3 mb-0'><a href="{% url 'login' %}" class="btn btn-primary">LOGIN</a></p>	
+	</div>
+
+	{% block about_modal%}
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">Modal</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+						<span class="sr-only">Close</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p>This is an example of the Modal component which you can use to show content.
+					Any content can be placed inside the modal and it can use the Bootstrap grid classes.
+					</p>
+					<p>
+						<a href="https://patrol7171.github.io" target="_ext">For more info about me...</a>
+					</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary-outline" data-dismiss="modal">OK</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	{% endblock %}
+
+{% endblock %}

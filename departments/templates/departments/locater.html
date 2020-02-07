@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+
+{% block heading%}
+	<h4 class='mt-2'>EMPLOYEE / SITE LOCATER</h4>
+{% endblock %}
+
+{% block content %}
+	<div class="container-fluid" id="main">
+		<div class="row row-offcanvas row-offcanvas-left">
+			<!--Main col starts/-->
+			<div class="col main mt-3">
+			
+				<!--Alert Div/--> 				
+				<div class="alert alert-warning fade collapse" role="alert" id="myAlert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">×</span>
+						<span class="sr-only">Close</span>
+					</button>
+					<strong>Holy guacamole!</strong> This is an example of an alert.
+				</div>
+				<!--/Alert Div-->
+				
+				<p class="lead">
+					It's the 4th generation of this popular responsive framework. Bootstrap 4 will include some interesting 
+					new features such as flexbox, 5 grid sizes and larger font sizes.
+				</p>				
+
+				<div class="mb-3">
+					<div class="card-deck">
+						<div class="card card-inverse card-danger text-center">
+							<div class="card-body">
+								<blockquote class="card-blockquote">
+									<p>The Bootstrap 3.x element that was called "Panel" before, is now called a "Card".</p>
+									<cite title="Source Title">Sense</cite>
+								</blockquote>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--/row-->
+				
+				<div class="row my-4">
+					<div class="col-lg-3 col-md-4">
+						<div class="card">
+							<div class="card-body">
+								<h4 class="card-title">Layouts</h4>
+								<p class="card-text">Flexbox provides simpler, more flexible layout options like vertical centering.</p>
+								<a href="#" class="btn btn-primary">Button</a>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-9 col-md-8">
+						<div class="table-responsive">
+							<table class="table table-striped">
+								<thead class="thead-inverse">
+									<tr>
+										<th>#</th>
+										<th>Label</th>
+										<th>Header</th>
+										<th>Column</th>
+										<th>Data</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>1,001</td>
+										<td>responsive</td>
+										<td>bootstrap</td>
+										<td>cards</td>
+										<td>grid</td>
+									</tr>
+									<tr>
+										<td>1,002</td>
+										<td>rwd</td>
+										<td>web designers</td>
+										<td>theme</td>
+										<td>responsive</td>
+									</tr>
+									<tr>
+										<td>1,005</td>
+										<td>navbar</td>
+										<td>sticky</td>
+										<td>jumbtron</td>
+										<td>header</td>
+									</tr>
+									<tr>
+										<td>1,006</td>
+										<td>collapse</td>
+										<td>affix</td>
+										<td>submenu</td>
+										<td>flexbox</td>
+									</tr>
+									<tr>
+										<td>1,007</td>
+										<td>layout</td>
+										<td>examples</td>
+										<td>themes</td>
+										<td>grid</td>
+									</tr>
+									<tr>
+										<td>1,008</td>
+										<td>migration</td>
+										<td>bootstrap 4</td>
+										<td>flexbox</td>
+										<td>design</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<!--/row-->
+				
+			</div>
+			<!--/main col ends-->
+		</div>
+	</div>
+	<!--/.container-->
+{% endblock %}
