@@ -1,7 +1,14 @@
 {% extends 'base.html' %}
 
 {% block heading%}
-	<h6 class='mb-1'>{{ user.get_short_name }}'s Dashboard</h6>
+	<div class="container-fluid">				
+		<div class="row">
+			<div class="col">
+				<h6 class="float-left">{{ user.get_short_name }}'s Dashboard</h6>
+				<small class="float-right"><i>Today is {{ currentDate }}</i></small>
+			</div>
+		</div>
+	</div>
 {% endblock %}
 
 {% block content %}
@@ -30,7 +37,7 @@
 										<i class="fas fa-user fa-5x"></i>
 									</div>
 									<h6 class="text-uppercase">My Open Cases</h6>
-									<h1 class="display-4">8</h1>
+									<h1 class="display-4">{{ cardValues.0 }}</h1>
 								</div>
 							</div>
 						</div>
@@ -41,7 +48,7 @@
 										<i class="fas fa-user-friends fa-5x"></i>
 									</div>
 									<h6 class="text-uppercase">Team Open Cases</h6>
-									<h1 class="display-4">37</h1>
+									<h1 class="display-4">{{ cardValues.1 }}</h1>
 								</div>
 							</div>
 						</div>
@@ -51,8 +58,8 @@
 									<div class="rotate">
 										<i class="fas fa-users fa-5x"></i>
 									</div>
-									<h6 class="text-uppercase">Open HR Cases Total</h6>
-									<h1 class="display-4">225</h1>
+									<h6 class="text-uppercase">All HR Open Cases</h6>
+									<h1 class="display-4">{{ cardValues.2 }}</h1>
 								</div>
 							</div>
 						</div>
@@ -62,8 +69,8 @@
 									<div class="rotate">
 										<i class="fas fa-suitcase fa-5x"></i>
 									</div>
-									<h6 class="text-uppercase">YTD Team Case Total </h6>
-									<h1 class="display-4">612</h1>
+									<h6 class="text-uppercase">Team YTD Case Total </h6>
+									<h1 class="display-4">{{ cardValues.3 }}</h1>
 								</div>
 							</div>
 						</div>				
@@ -75,21 +82,19 @@
 					<div class="row">
 						<div class="col">
 							<div class="card card-inverse card-success text-center">
-								<div class="card-body">
-									<blockquote class="card-blockquote">
-										<p class="text-uppercase">my case percentage within sla</p>
-									</blockquote>
+								<div class="card-body2">
+									<h6 class="text-uppercase">my case percentage within sla</h6>
 									<div><canvas id="gaugeChart1"></canvas></div>
+									<h6>{{ gaugeValues.0 }}%</h6>
 								</div>
 							</div>
 						</div>
 						<div class="col">						
 							<div class="card card-inverse card-success text-center">
-								<div class="card-body">
-									<blockquote class="card-blockquote">
-										<p class="text-uppercase">my team's case percentage within sla</p>
-									</blockquote>
+								<div class="card-body2">
+									<h6 class="text-uppercase">my team's case percentage within sla</h6>
 									<div><canvas id="gaugeChart2"></canvas></div>
+									<h6>{{ gaugeValues.1 }}%</h6>								
 								</div>
 							</div>
 						</div>	

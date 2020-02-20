@@ -6,6 +6,7 @@ from django.contrib.auth.models import Group
 from PIL import Image
 
 
+
 class HRTeamUser(models.Model):
   id = models.AutoField(db_column='ID', primary_key=True)
   firstname = models.CharField(db_column='FirstName', max_length=15)
@@ -30,6 +31,15 @@ class HRTeamUser(models.Model):
   def __str__(self):
     return self.userid
 
+  def get_short_job_title(self):
+    if self.accesslevel == "Associate":
+      job = str(self.jobtitle)
+      job_words = job.split(' - ')
+      self.associate_title = job_words[0]
+      return self.associate_title
+    else:
+      return self.jobtitle
+
   def get_hr_group(self):
     if self.accesslevel == "Associate":
       job = str(self.jobtitle)
@@ -38,8 +48,7 @@ class HRTeamUser(models.Model):
       return self.hr_group
     else:
       return "HR Management"
-	  
-
+	    
   class Meta:
 	  managed = False
 	  app_label = 'accounts'

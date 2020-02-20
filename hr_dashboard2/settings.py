@@ -31,9 +31,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounts.apps.AccountsConfig',
-    'departments',
-    'aldjemy',
+    'departments.apps.DepartmentsConfig',
     'crispy_forms',
+    'rest_framework',
+    
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

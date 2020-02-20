@@ -5,7 +5,7 @@ from django.contrib import auth
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
 from .forms import ProfileUpdateForm
-
+from accounts.models import HRTeamUser
 
 
 def login(request):
@@ -37,8 +37,9 @@ def profile(request):
             return redirect('dashboard')
     else:
         p_form = ProfileUpdateForm(instance=request.user.profile)
-        
-    context = {
-        'p_form': p_form
-    }
+
+    userInfo = HRTeamUser.objects.get(userid__exact = request.user)
+    job_title = userInfo.get_short_job_title()
+    context = {'p_form': p_form, 'job_title': job_title}
+	
     return render(request, 'accounts/profile.html', context)

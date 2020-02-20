@@ -1,7 +1,14 @@
 {% extends 'base.html' %}
 
 {% block heading%}
-	<h6 class='mb-1'>{{ user.get_short_name }}'s Dashboard</h6>
+	<div class="container-fluid">				
+		<div class="row">
+			<div class="col">
+				<h6 class="float-left">{{ user.get_short_name }}'s Dashboard</h6>
+				<small class="float-right"><i>Today is {{ currentDate }}</i></small>
+			</div>
+		</div>
+	</div>
 {% endblock %}
 
 {% block content %}
@@ -92,6 +99,7 @@
 									<div>
 										<canvas id="gaugeChart1" height="75" width="150"></canvas>
 									</div>
+									<h6><small>##%</small></h6>
 								</div>
 							</div>
 						</div>
@@ -102,6 +110,7 @@
 									<div>
 										<canvas id="gaugeChart2" height="75" width="150"></canvas>
 									</div>
+									<h6><small>##%</small></h6>
 								</div>
 							</div>
 						</div>									
@@ -112,6 +121,7 @@
 									<div>
 										<canvas id="gaugeChart3" height="75" width="150"></canvas>
 									</div>
+									<h6><small>##%</small></h6>
 								</div>
 							</div>
 						</div>		
@@ -122,6 +132,7 @@
 									<div>
 										<canvas id="gaugeChart4" height="75" width="150"></canvas>
 									</div>
+									<h6><small>##%</small></h6>
 								</div>
 							</div>
 						</div>									
@@ -132,6 +143,7 @@
 									<div>
 										<canvas id="gaugeChart5" height="75" width="150"></canvas>
 									</div>
+									<h6><small>##%</small></h6>
 								</div>
 							</div>
 						</div>						

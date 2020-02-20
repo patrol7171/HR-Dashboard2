@@ -1,7 +1,6 @@
 from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import Group
-#from django.contrib.auth.models import AbstractUser
 
 
 
@@ -57,9 +56,9 @@ class HrCasesData(models.Model):
     casestatus = models.TextField(db_column='CaseStatus', blank=True, null=True)
     tierlevel = models.TextField(db_column='TierLevel', blank=True, null=True)
     priority = models.TextField(db_column='Priority', blank=True, null=True)
-    datereceived = models.TextField(db_column='DateReceived', blank=True, null=True)
+    datereceived = models.DateTimeField(db_column='DateReceived', blank=True, null=True)
     satisfactionscore = models.TextField(db_column='SatisfactionScore', blank=True, null=True)
-    dateclosed = models.TextField(db_column='DateClosed', blank=True, null=True)
+    dateclosed = models.DateTimeField(db_column='DateClosed', blank=True, null=True)
 
     def __str__(self):
         return self.id
