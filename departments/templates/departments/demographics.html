@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
 
-{% block heading%}
+{% block heading %}
 	<h6 class='mb-1'>OUR EMPLOYEE DEMOGRAPHICS</h6>
 {% endblock %}
 
+
 {% block content %}
 	<div class="container-fluid" id="main">
-		<div class="row row-offcanvas row-offcanvas-left">
+		<div id= "main-row" class="row row-offcanvas row-offcanvas-left">
 			<!--Main col starts/-->
 			<div class="col main mt-3">
 			
@@ -21,74 +22,449 @@
 				<!--/Alert Div-->
 
 				<div class="card-deck mb-3">
-					<div class="card text-center">
+					<div class="card text-center" style="max-width:45%">
 						<div class="card-body text-center">
-							<h5 class="card-title">Heading1</h5>
-							<div id='graph-img'>
-								<!-- <img src={{ src_dict.src1 }} alt="demoImg1"> -->
-							</div>
+							<h6 class="card-title">Employment Status - All Records On File<h6>
+							<div class="pie-chart"><canvas id="empStat-pieChart"></canvas></div>
 						</div>
 					</div>
-					<div class="card text-center">
-						<div class="card-body text-center">
-							<h5 class="card-title">Heading2</h5>
-							<div id='graph-img'>
-								<!-- <img src={{ src_dict.src1 }} alt="demoImg1"> -->
-							</div>
+					<div class="card text-center" style="max-width:55%">
+						<div class="card-body graph-card text-center">
+							<h6 class="card-title">Staff Totals By Department</h6>
+							<div class="bar-chart"><canvas id="deptTotals-barChart"></canvas></div>
 						</div>
 					</div>
 				</div>
 				<!--/row-->
-				
-				<div class="card-columns">
-					<div class="card card-body text-center">
-						<h5 class="card-title">Heading3</h5>
-						<div id='graph-img'>
-							<!-- <img src={{ src_dict.src1 }} alt="demoImg1"> -->
+
+				<div class="card-deck mb-3">
+					<div class="card text-center" style="max-width:27%">
+						<div class="card-body text-center">
+							<h6 class="card-title">Staff Gender Percentages</h6>
+							<div class="pie-chart"><canvas id="genderCount-pieChart"></canvas></div>
 						</div>
 					</div>
-					<div class="card card-body text-center">
-						<h5 class="card-title">Heading4</h5>
-						<div id='graph-img'>
-							<!-- <img src={{ src_dict.src1 }} alt="demoImg1"> -->
+					<div class="card text-center" style="max-width:46%">
+						<div class="card-body text-center">
+							<h6 class="card-title">Staff Racial Percentages</h6>
+							<div class="pie-chart"><canvas id="raceCount-pieChart"></canvas></div>
 						</div>
 					</div>
-					<div class="card card-body text-center">
-						<h5 class="card-title">Heading5</h5>
-						<div id='graph-img'>
-							<!-- <img src={{ src_dict.src1 }} alt="demoImg1"> -->
+					<div class="card text-center" style="max-width:27%">
+						<div class="card-body text-center">
+							<h6 class="card-title">Staff Marital Status Percentages</h6>
+							<div class="pie-chart"><canvas id="maritalStat-pieChart"></canvas></div>
 						</div>
 					</div>
 				</div>
-				<!--/card-columns-->	
+				<!--/card-columns-->
+			
+				<div class="card-deck mb-3">
+					<div class="card text-center" style="max-width:55%">
+						<div class="card-body text-center">
+							<h6 class="card-title">Staff Racial Distribution By Department<h6>
+							<div class="bar-chart"><canvas id="raceByDept-barChart"></canvas></div>
+						</div>
+					</div>
+					<div class="card text-center" style="max-width:45%">
+						<div class="card-body text-center">
+							<h6 class="card-title">Staff Gender Distribution By Department</h6>
+							<div class="bar-chart"><canvas id="maritalByDept-barChart"></canvas></div>
+						</div>
+					</div>
+				</div>
+				<!--/row-->	
 				
 				<div class="card-deck mb-3">
-					<div class="card text-center">
+					<div class="card text-center" style="width:100%">
 						<div class="card-body text-center">
-							<h5 class="card-title">Heading6</h5>
-							<div id='graph-img'>
-								<!-- <img src={{ src_dict.src1 }} alt="demoImg1"> -->
-							</div>
+							<h6 class="card-title">Staff Age Distribution</h6>
+							<div class="bar-chart"><canvas id="ageCount-barChart"></canvas></div>
 						</div>
 					</div>
 				</div>
-				<!--/row-->
-				
-				<div class="card-deck mb-3">
-					<div class="card text-center">
-						<div class="card-body text-center">
-							<h5 class="card-title">Heading7</h5>
-							<div id='graph-img'>
-								<!-- <img src={{ src_dict.src1 }} alt="demoImg1"> -->
-							</div>
-						</div>
-					</div>
-				</div>
-				<!--/row-->
+				<!--/row-->				
 			
 			</div>
 			<!--/main col ends-->
 		</div>
 	</div>
 	<!--/.container-->
+{% endblock %}
+
+
+{% block demographicsCharts-script %}
+	var statusValues = {{ statusValues|safe }};
+	var deptCountValues = {{ deptCountValues|safe }};
+	var genderValues = {{ genderValues|safe }};
+	var raceValues = {{ raceValues|safe }};
+	var maritalStatValues = {{ maritalStatValues|safe }};
+	var raceByDeptValues = {{ raceByDeptValues|safe }};
+	var maritalStatByDeptValues = {{ maritalStatByDeptValues|safe }};
+	var ageCountValues = {{ ageCountValues|safe }};
+		
+	var statusSum1 = statusValues[0] + statusValues[1]
+	var statusSum2 = statusValues[2] + statusValues[3] + statusValues[4]
+		
+	var rbdv = raceByDeptValues;
+	var msbdv = maritalStatByDeptValues;
+	var teamA = 'Admin Offices';
+	var teamB = 'IT - Information Systems';
+	var teamC = "Production       ";
+	var teamD = 'Sales';
+	var teamE = 'Software Engineering';
+	var teamF = 'Executive Office';
+	var raceA = 'American Indian or Alaska Native';
+	var raceB = 'Asian';
+	var raceC = 'Black or African American'; 
+	var raceD = 'Hispanic';
+	var raceE = 'Two or more races';
+	var raceF = 'White';
+	var mStatA = 'Divorced'; 
+	var mStatB = 'Married';
+	var mStatC = 'Separated';
+	var mStatD = 'Single';
+	var mStatE = 'Widowed';
+	
+	var aaNums = [rbdv[teamA][raceA],rbdv[teamB][raceA],rbdv[teamC][raceA],rbdv[teamD][raceA],rbdv[teamE][raceA],rbdv[teamF][raceA]];
+	var aNums = [rbdv[teamA][raceB],rbdv[teamB][raceB],rbdv[teamC][raceB],rbdv[teamD][raceB],rbdv[teamE][raceB],rbdv[teamF][raceB]];
+	var bNums = [rbdv[teamA][raceC],rbdv[teamB][raceC],rbdv[teamC][raceC],rbdv[teamD][raceC],rbdv[teamE][raceC],rbdv[teamF][raceC]];
+	var hNums = [rbdv[teamA][raceD],rbdv[teamB][raceD],rbdv[teamC][raceD],rbdv[teamD][raceD],rbdv[teamE][raceD],rbdv[teamF][raceD]];
+	var tNums = [rbdv[teamA][raceE],rbdv[teamB][raceE],rbdv[teamC][raceE],rbdv[teamD][raceE],rbdv[teamE][raceE],rbdv[teamF][raceE]];
+	var wNums = [rbdv[teamA][raceF],rbdv[teamB][raceF],rbdv[teamC][raceF],rbdv[teamD][raceF],rbdv[teamE][raceF],rbdv[teamF][raceF]];
+
+	var divNums = [msbdv[teamA][mStatA],msbdv[teamB][mStatA],msbdv[teamC][mStatA],msbdv[teamD][mStatA],msbdv[teamE][mStatA],msbdv[teamF][mStatA]];
+	var marNums = [msbdv[teamA][mStatB],msbdv[teamB][mStatB],msbdv[teamC][mStatB],msbdv[teamD][mStatB],msbdv[teamE][mStatB],msbdv[teamF][mStatB]];
+	var sepNums = [msbdv[teamA][mStatC],msbdv[teamB][mStatC],msbdv[teamC][mStatC],msbdv[teamD][mStatC],msbdv[teamE][mStatC],msbdv[teamF][mStatC]];
+	var singNums = [msbdv[teamA][mStatD],msbdv[teamB][mStatD],msbdv[teamC][mStatD],msbdv[teamD][mStatD],msbdv[teamE][mStatD],msbdv[teamF][mStatD]];
+	var widNums = [msbdv[teamA][mStatE],msbdv[teamB][mStatE],msbdv[teamC][mStatE],msbdv[teamD][mStatE],msbdv[teamE][mStatE],msbdv[teamF][mStatE]];
+	
+	var ageCountValLabels = ageCountValues[0]
+	var ageCountValData = ageCountValues[1]
+		
+
+	<!-- chart IDs -->	
+	var ctx1 = document.getElementById('empStat-pieChart');
+	var ctx2 = document.getElementById('deptTotals-barChart');
+	var ctx3 = document.getElementById('genderCount-pieChart');
+	var ctx4 = document.getElementById('raceCount-pieChart');
+	var ctx5 = document.getElementById('maritalStat-pieChart');
+	var ctx6 = document.getElementById('raceByDept-barChart');
+	var ctx7 = document.getElementById('maritalByDept-barChart');
+	var ctx8 = document.getElementById('ageCount-barChart');
+	
+	var seq = palette('tol-sq', 10);
+
+
+
+	<!-- chart option settings -->
+	var options1 = {
+		responsive: true,
+		maintainAspectRatio: false,
+		cutoutPercentage: 30,
+		legend: {
+			display: true,
+			position: 'right',
+			labels: { fontSize: 8 }			
+		},
+		tooltips: {
+			callbacks: {
+				label: function(tooltipItem, data) {
+				var dataset = data.datasets[tooltipItem.datasetIndex];
+				var index = tooltipItem.index;
+				return dataset.labels[index] + ": " + dataset.data[index];
+				}
+			}
+		},
+		plugins: {
+			datalabels: {
+				formatter: (value, ctx) => {
+					let sum = 0;
+					let dataArr = ctx.chart.data.datasets[0].data;
+					dataArr.map(data => {
+						sum += data;
+					});
+					let percentage = (value * 100 / sum).toFixed(0) + "%";
+					return percentage;
+				},
+				color: '#000',
+			}
+		}
+	}
+	
+	var options2 = {
+		responsive: true,
+		maintainAspectRatio: false,
+		legend: { display: false },
+		plugins: {
+			datalabels: { display: false },
+		}		
+	}
+
+	var options3 = {
+		responsive: true,
+		maintainAspectRatio: false,
+		legend: { 
+			display: true,
+			position: 'right',
+			labels: { 
+				fontSize: 7
+			}
+		},
+		plugins: {
+			datalabels: {
+				formatter: (value, ctx) => {
+					let sum = 0;
+					let dataArr = ctx.chart.data.datasets[0].data;
+					dataArr.map(data => {
+						sum += data;
+					});
+					let percentage = (value * 100 / sum).toFixed(0) + "%";
+					return percentage;
+				},
+				color: '#000',
+			},
+			colorschemes: {
+				scheme: 'brewer.DarkTwo8'
+			}
+		}
+	}
+
+	var options4 = {
+		responsive: true,
+		maintainAspectRatio: false,
+		legend: { 
+			display: true,
+			position: 'bottom',
+			labels: { fontSize: 8 }
+		},
+		plugins: {
+			datalabels: { display: false }
+		},			
+		scales: {
+			xAxes: [{
+				stacked: true
+			}],
+			yAxes: [{
+				stacked: true
+			}]		
+		}
+	}
+
+	var options5 = {
+		responsive: true,
+		maintainAspectRatio: false,
+		legend: { display: false },
+		plugins: {
+			datalabels: { display: false }
+		}			
+	}
+
+
+
+
+	<!-- chart data settings -->
+	var statusData = {	
+		labels: ['Voluntarily Terminated', 'Terminated for Cause', 'Active', 'Future Start', 'Leave of Absence'],		
+		datasets: [{
+			label: 'Employee Status',
+			labels: ['Voluntarily Terminated', 'Terminated for Cause', 'Active', 'Future Start', 'Leave of Absence'],		
+			data: statusValues,
+			backgroundColor : [
+			  "#ffcc99", "#ffd9b3", "#88cc00", "#99e600", "#aaff00"
+			],			
+			borderColor : "#fff",	
+			borderWidth: 2
+		},{
+			label: 'All Records', 
+			labels: ['Terminated', 'Current Staff'],		
+            data: [statusSum1, statusSum2],
+			backgroundColor : [
+			  "#ff9933", "#669900"
+			],
+			borderColor : "#fff",			
+			borderWidth: 2
+        }]
+	}
+	
+	var deptData = {
+		labels: ['Executive Office', 'Admin Offices', 'Information Systems', 'Production', 'Sales', 'Software Engineering'],
+		datasets: [{
+			label: 'Department Total',
+			data: deptCountValues,
+			backgroundColor : [
+			  "gold", "olive", "magenta", "teal", "coral", "purple"
+			],
+			borderColor : "#ccc",			
+			borderWidth: 1
+		}]
+	}
+	
+	var genderData = {
+		labels: ['Male', 'Female'],
+		datasets: [{
+			label: 'Gender',
+			data: genderValues,
+			borderWidth: 2
+		}]
+	}
+	
+	var raceData = {
+		labels: ['American Indian or Alaska Native', 'Asian', 'Black or African American', 'Hispanic', 'Two or more races', 'White'],
+		datasets: [{
+			label: 'Race',
+			data: raceValues,
+			borderWidth: 2
+		}]
+	}
+
+	var maritalData = {
+		labels: ['Divorced', 'Married', 'Separated', 'Single', 'Widowed'],
+		datasets: [{
+			label: 'Marital Status',
+			data: maritalStatValues,
+			borderWidth: 2
+		}]
+	}
+
+	var raceByDeptData = {
+		labels: ['Admin Offices', 'Information Systems', 'Production', 'Sales', 'Software Engineering', 'Executive Office'],
+		datasets: [{
+			label: 'American Indian or Alaska Native',
+			data: aaNums,
+			backgroundColor: 'gold',
+			borderColor: '#fff',
+			borderWidth: 1
+		}, {
+			label: 'Asian',
+			data: aNums,
+			backgroundColor: 'olive',
+			borderColor: '#fff',
+			borderWidth: 1
+		}, {
+			label: 'Black or African American',
+			data: bNums,
+			backgroundColor: 'magenta',
+			borderColor: '#fff',
+			borderWidth: 1
+		}, {
+			label: 'Hispanic',
+			data: hNums,
+			backgroundColor: 'teal',
+			borderColor: '#fff',
+			borderWidth: 1	
+		}, {
+			label: 'Two or more races',
+			data: tNums,
+			backgroundColor: 'coral',
+			borderColor: '#fff',
+			borderWidth: 1
+		}, {
+			label: 'White',
+			data: wNums,
+			backgroundColor: 'purple',
+			borderColor: '#fff',
+			borderWidth: 1				
+		}]
+	}
+
+	var maritalByDeptData = {
+		labels: ['Admin Offices', 'Information Systems', 'Production', 'Sales', 'Software Engineering', 'Executive Office'],
+		datasets: [{
+			label: 'Divorced',
+			data: divNums,
+			backgroundColor: 'gold',
+			borderColor: '#fff',
+			borderWidth: 1
+		}, {
+			label: 'Married',
+			data: marNums,
+			backgroundColor: 'olive',
+			borderColor: '#fff',
+			borderWidth: 1
+		}, {
+			label: 'Separated',
+			data: sepNums,
+			backgroundColor: 'magenta',
+			borderColor: '#fff',
+			borderWidth: 1
+		}, {
+			label: 'Single',
+			data: singNums,
+			backgroundColor: 'coral',
+			borderColor: '#fff',
+			borderWidth: 1
+		}, {
+			label: 'Widowed',
+			data: widNums,
+			backgroundColor: 'purple',
+			borderColor: '#fff',
+			borderWidth: 1
+		}]
+	}
+	
+		var ageData = {
+		labels: ageCountValLabels,
+		datasets: [{
+			label: 'Age Total',
+			data: ageCountValData,
+			backgroundColor: poolColors(ageCountValData.length),
+			borderColor: '#ccc',
+			borderWidth: 2,
+
+		}]
+	}
+	
+
+
+	
+	<!-- initialize charts -->
+	var myChart1 = new Chart(ctx=ctx1, {
+		type: 'doughnut',
+		data: statusData,
+		options: options1
+	});
+	
+	var myChart2 = new Chart(ctx=ctx2, {
+		type: 'horizontalBar',
+		data: deptData,
+		options: options2
+	});	
+	
+	var myChart3 = new Chart(ctx=ctx3, {
+		type: 'doughnut',
+		data: genderData,
+		options: options3
+	});
+
+	var myChart4 = new Chart(ctx=ctx4, {
+		type: 'doughnut',
+		data: raceData,
+		options: options3
+	});
+	
+	var myChart5 = new Chart(ctx=ctx5, {
+		type: 'doughnut',
+		data: maritalData,
+		options: options3
+	});
+	
+	var myChart6 = new Chart(ctx=ctx6, {
+		type: 'horizontalBar',
+		data: raceByDeptData,
+		options: options4
+	});
+
+	var myChart7 = new Chart(ctx=ctx7, {
+		type: 'horizontalBar',
+		data: maritalByDeptData,
+		options: options4
+	});	
+	
+	var myChart8 = new Chart(ctx=ctx8, {
+		type: 'bar',
+		data: ageData,
+		options: options5
+	});
+	
 {% endblock %}

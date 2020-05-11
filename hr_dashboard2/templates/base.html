@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Dental Magic HR Portal2</title>
+    <title>Dental Magic HR Analytics Portal2</title>
 
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
@@ -21,7 +21,7 @@
     <!-- My Custom CSS -->
     <link rel="shortcut icon" type="image/png" href="{% static 'favicon.png' %}"/>	
     <link href="{% static 'css/custom-style.css' %}" rel="stylesheet" />
-	<link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+	<link href="{% static 'css/chart-styles.css' %}" rel="stylesheet" />
 
 	{% block bg-style %}{% endblock %}
 
@@ -37,37 +37,62 @@
             <ul class="list-unstyled components">
                 <h6 class='pb-3 pt-1 text-center'><span class="sidebarTitle px-2">HR DATA ANALYTICS</span></h6>	
 				{% if user.is_authenticated %}
-                 <li class="{{ dashboard_page }}"><a href="{% url 'dashboard' %}"><span class="oi oi-dashboard">&nbsp;</span><span class='title'> My Dashboard</span></a></li>			 
+                 <li class="{{ dashboard_page }}"><a href="{% url 'dashboard' %}"><span class="oi oi-dashboard">&nbsp;</span><span class='title'> My Dashboard</span></a></li>					 
 					 {% if user.hr_group == 'Recruitment & Selection' %}
-					  <li class="{{ recruitment_page }}"><a href="{% url 'recruitment' %}"><span class="oi oi-people">&nbsp;</span><span class='title'> Recruitment</span></a></li>
+						<li id="deptMenu" class="{{ dept_menu }}">
+							<a href="#pageSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><span class="oi oi-pie-chart">&nbsp;</span><span class='title'> My Team Metrics</span></a>
+							<ul class="collapse list-unstyled" id="pageSubmenu1">					
+								<li class="{{ recruitment_page }}"><a href="{% url 'recruitment' %}"><span class="oi oi-people">&nbsp;</span><span class='title'> Recruitment</span></a></li>	  
+							</ul>
+						</li>
 					 {% elif user.hr_group == 'Attrition & Retention' %}
-					  <li class="{{ attrition_page }}"><a href="{% url 'attrition' %}"><span class="oi oi-pie-chart">&nbsp;</span><span class='title'> Attrition & Retention</span></a></li>
+						<li id="deptMenu" class="{{ dept_menu }}">
+							<a href="#pageSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><span class="oi oi-pie-chart">&nbsp;</span><span class='title'> My Team Metrics</span></a>
+							<ul class="collapse list-unstyled" id="pageSubmenu1">					
+								<li class="{{ attrition_page }}"><a href="{% url 'attrition' %}"><span class="oi oi-move">&nbsp;</span><span class='title'> Attrition & Retention</span></a></li>
+							</ul>
+						</li> 
 					 {% elif user.hr_group == 'Benefits & Compensation' %}
-					  <li class="{{ compensation_page }}"><a href="{% url 'compensation' %}"><span class="oi oi-dollar">&nbsp;</span><span class='title'> Compensation & Benefits</span></a></li>
+						<li id="deptMenu" class="{{ dept_menu }}">
+							<a href="#pageSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><span class="oi oi-pie-chart">&nbsp;</span><span class='title'> My Team Metrics</span></a>
+							<ul class="collapse list-unstyled" id="pageSubmenu1">					
+								<li class="{{ compensation_page }}"><a href="{% url 'compensation' %}"><span class="oi oi-dollar">&nbsp;</span><span class='title'> Compensation & Benefits</span></a></li>
+							</ul>
+						</li> 
 					 {% elif user.hr_group == 'Training & Development' %}
-					  <li class="{{ talent_page }}"><a href="{% url 'talent' %}"><span class="oi oi-star">&nbsp;</span><span class='title'> Talent Management</span></a></li>
+						<li id="deptMenu" class="{{ dept_menu }}">
+							<a href="#pageSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><span class="oi oi-pie-chart">&nbsp;</span><span class='title'> My Team Metrics</span></a>
+							<ul class="collapse list-unstyled" id="pageSubmenu1">						  
+								<li class="{{ talent_page }}"><a href="{% url 'talent' %}"><span class="oi oi-star">&nbsp;</span><span class='title'> Talent Management</span></a></li>	
+							</ul>
+						</li> 
 					 {% elif user.hr_group == 'Employee Relations' %}
-					  <li class="{{ relations_page }}"><a href="{% url 'relations' %}"><span class="oi oi-graph">&nbsp;</span><span class='title'> Employee Relations</span></a></li>
+						<li id="deptMenu" class="{{ dept_menu }}">
+							<a href="#pageSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><span class="oi oi-pie-chart">&nbsp;</span><span class='title'> My Team Metrics</span></a>
+							<ul class="collapse list-unstyled" id="pageSubmenu1">					
+								<li class="{{ relations_page }}"><a href="{% url 'relations' %}"><span class="oi oi-graph">&nbsp;</span><span class='title'> Employee Relations</span></a></li>
+							</ul>
+						</li> 
 					 {% else %}
-					  <li class="{{ recruitment_page }}"><a href="{% url 'recruitment' %}"><span class="oi oi-people">&nbsp;</span><span class='title'> Recruitment</span></a></li>
-					  <li class="{{ attrition_page }}"><a href="{% url 'attrition' %}"><span class="oi oi-pie-chart">&nbsp;</span><span class='title'> Attrition & Retention</span></a></li>
-					  <li class="{{ compensation_page }}"><a href="{% url 'compensation' %}"><span class="oi oi-dollar">&nbsp;</span><span class='title'> Compensation & Benefits</span></a></li>
-					  <li class="{{ talent_page }}"><a href="{% url 'talent' %}"><span class="oi oi-star">&nbsp;</span><span class='title'> Talent Management</span></a></li>
-					  <li class="{{ relations_page }}"><a href="{% url 'relations' %}"><span class="oi oi-graph">&nbsp;</span><span class='title'> Employee Relations</span></a></li>
-			          <li class="{{ demographics_page }}"><a href="{% url 'demographics' %}"><span class="oi oi-bar-chart">&nbsp;</span><span class='title'> Our Demographics</span></a></li>						  
-					  <li class="{{ locater_page }}"><a href="{% url 'locater' %}"><span class="oi oi-map-marker">&nbsp;</span><span class='title'> Employee/Site Locater</span></a></li>
-					  <li class="{{ policies_page }}"><a href="{% url 'policies' %}"><span class="oi oi-book">&nbsp;</span><span class='title'> Policies/Procedures</span></a></li>					  
+						<li id="deptMenu" class="{{ dept_menu }}">
+							<a href="#pageSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><span class="oi oi-pie-chart">&nbsp;</span><span class='title'> HR Team Metrics</span></a>
+							<ul class="collapse list-unstyled" id="pageSubmenu1">					
+								<li class="{{ attrition_page }}"><a href="{% url 'attrition' %}"><span class="oi oi-move">&nbsp;</span><span class='title'> Attrition & Retention</span></a></li>
+								<li class="{{ compensation_page }}"><a href="{% url 'compensation' %}"><span class="oi oi-dollar">&nbsp;</span><span class='title'> Compensation & Benefits</span></a></li>
+								<li class="{{ relations_page }}"><a href="{% url 'relations' %}"><span class="oi oi-graph">&nbsp;</span><span class='title'> Employee Relations</span></a></li>
+								<li class="{{ recruitment_page }}"><a href="{% url 'recruitment' %}"><span class="oi oi-people">&nbsp;</span><span class='title'> Recruitment</span></a></li>	  
+								<li class="{{ talent_page }}"><a href="{% url 'talent' %}"><span class="oi oi-star">&nbsp;</span><span class='title'> Talent Management</span></a></li>	
+							</ul>
+						</li>
 					 {% endif %}
-					 {% if user.access_level == 'Associate' %}
-					 <li id="jobAidMenu" class="{{ jobaid_menu }}">
-						<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><span class="oi oi-briefcase">&nbsp;</span><span class='title'> Job Aids</span></a>
-						<ul class="collapse list-unstyled" id="pageSubmenu">
-							<li class="{{ demographics_page }}"><a href="{% url 'demographics' %}"><span class="oi oi-bar-chart">&nbsp;</span><span class='title'> Demographics</span></a></li>					
-							<li class="{{ locater_page }}"><a href="{% url 'locater' %}"><span class="oi oi-map-marker">&nbsp;</span><span class='title'> Employee/Site Locater</span></a></li>
-							<li class="{{ policies_page }}"><a href="{% url 'policies' %}"><span class="oi oi-book">&nbsp;</span><span class='title'> Policies/Procedures</span></a></li>
-						</ul>
-					 </li>
-					 {% endif %}				
+				 <li class="{{ demographics_page }}"><a href="{% url 'demographics' %}"><span class="oi oi-bar-chart">&nbsp;</span><span class='title'> Our Demographics</span></a></li>				 
+				 <li id="jobAidMenu" class="{{ jobaid_menu }}">
+					<a href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><span class="oi oi-briefcase">&nbsp;</span><span class='title'> Job Aids</span></a>
+					<ul class="collapse list-unstyled" id="pageSubmenu2">					
+						<li class="{{ locater_page }}"><a href="{% url 'locater' %}"><span class="oi oi-map-marker">&nbsp;</span><span class='title'> Employee/Site Locater</span></a></li>
+						<li class="{{ policies_page }}"><a href="{% url 'policies' %}"><span class="oi oi-book">&nbsp;</span><span class='title'> Policies/Procedures</span></a></li>
+					</ul>
+				 </li>				
 			    {% else %}
                  <li class="active"><a href="{% url 'home' %}"><span class="oi oi-home">&nbsp;</span> Home</a></li>				
 				{% endif %}
@@ -104,15 +129,13 @@
 				{% endblock %}	        
 			{% endif %}
             </div>
-            <!-- <div class="container"> -->
-				{% block content %}
-				{% endblock %}
-			<!-- </div> -->
+			{% block content %}
+			{% endblock %}
         </div><!-- Page Content Ends--> 		
     </div><!-- Page Body Wrapper Ends-->
 	
     <footer class="footer container-fluid text-center">
-        <div class='py-3'>
+        <div class= 'py-3'>
             <span class='small'>Dental Magic, Inc © {% now 'Y' %}</span> 
             <br>
             <span class='small'>Site Created by <a href="https://patrol7171.github.io" class="external" target="_blank">Rollins Web Design, Inc.</a></span>
@@ -134,10 +157,18 @@
 	<script src="{% static 'js/gauge.min.js' %}"></script>
 	
 	<!-- Charts.JS -->
-	<script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js'></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.4.0/dist/chartjs-plugin-datalabels.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-colorschemes"></script>
+	<script src="https://unpkg.com/chartjs-plugin-colorschemes"></script>	
+	
+	<!-- Palette JS -->
+	<script src="https://cdn.jsdelivr.net/npm/google-palette@1.1.0/palette.min.js"></script>
 	
 	<!-- Custom JS -->
-	<script src="{% static 'js/my_scripts.js' %}"></script>
+	<script src="{% static 'js/base_scripts.js' %}"></script>
+	<script src="{% static 'js/demographics_scripts.js' %}"></script>
+	
 	
     <script type="text/javascript">
 		$(document).ready(function () {
@@ -145,12 +176,23 @@
 				$('#sidebar').toggleClass('active');
 				$(this).toggleClass('active');
 			});
-			if ($('#pageSubmenu li').hasClass('active')) {
-			   $('#pageSubmenu').collapse('toggle');
-			   $('#pageSubmenu li:not(.active)').find("a").css('background', 'none');	  
+			if ($('#pageSubmenu1 li').hasClass('active')) {
+			   $('#pageSubmenu1').collapse('toggle');
+			   $('#pageSubmenu1 li:not(.active)').find("a").css('background', 'none');	  
+			}
+			if ($('#pageSubmenu2 li').hasClass('active')) {
+			   $('#pageSubmenu2').collapse('toggle');
+			   $('#pageSubmenu2 li:not(.active)').find("a").css('background', 'none');	  
 			}			
 		});
-		{% block gauge_script%}{% endblock %}		
+		
+		{% block gauge_script %}{% endblock %}
+		{% block dashPieChart1-script %}{% endblock %}
+		{% block dashPieChart2-script %}{% endblock %}		
+		{% block dashBarChart1-script %}{% endblock %}		
+		{% block dashBarChart2-script %}{% endblock %}
+		{% block demographicsCharts-script %}{% endblock %}
+		
     </script>
 
 </body>

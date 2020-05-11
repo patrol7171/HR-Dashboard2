@@ -17,9 +17,14 @@ p {
     font-family: 'Poppins', sans-serif;
     font-size: 1.1em;
     font-weight: 300;
-    line-height: 1.7em;
+    line-height: 1.5em;
     color: #999;
 }
+
+h6 {
+    font-size: .85rem !important;	
+}
+
 
 a, a:hover, a:focus {
     color: inherit;
@@ -129,6 +134,51 @@ a:hover {
 }
 
 
+#sidebarCollapse {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+
+#sidebarCollapse span {
+    width: 80%;
+    height: 2px;
+    margin: 0 auto;
+    display: block;
+    background: #23B4F7 !important;
+    transition: all 0.8s cubic-bezier(0.810, -0.330, 0.345, 1.375);
+    transition-delay: 0.2s;
+}
+
+#sidebarCollapse:hover span {
+    background: #69DC00 !important;	
+}
+
+#sidebarCollapse span:first-of-type {
+    transform: rotate(45deg) translate(2px, 2px);
+}
+
+#sidebarCollapse span:nth-of-type(2) {
+    opacity: 0;
+}
+
+#sidebarCollapse span:last-of-type {
+    transform: rotate(-45deg) translate(1px, -1px);
+}
+
+#sidebarCollapse.active span {
+    transform: none;
+    opacity: 1;
+    margin: 5px auto;
+}
+
+#home-header {
+	color: #fff !important;	
+	text-align: center;
+	text-shadow: 1px 1px 10px #000, 0 0 30px #69DC00, 0 0 10px #999;
+}
+
+
 a[data-toggle="collapse"] {
     position: relative;
 }
@@ -186,53 +236,36 @@ span.logo2
 /* ---------------------------------------------------
     CONTENT STYLE
 ----------------------------------------------------- */
+.card {
+    overflow:hidden;
+}
+
+.card-body .rotate {
+    z-index: 8;
+    float: right;
+    height: 100%;
+}
+
+.card-body .rotate i {
+    color: rgba(20, 20, 20, 0.15);
+    position: absolute;
+    left: 0;
+    left: auto;
+    right: -10px;
+    bottom: 0;
+    display: block;
+    -webkit-transform: rotate(-44deg);
+    -moz-transform: rotate(-44deg);
+    -o-transform: rotate(-44deg);
+    -ms-transform: rotate(-44deg);
+    transform: rotate(-44deg);
+}
+
 #content {
     width: 100%;
     padding: 20px;
     min-height: 88vh;
     transition: all 0.3s;
-}
-
-#sidebarCollapse {
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-}
-
-#sidebarCollapse span {
-    width: 80%;
-    height: 2px;
-    margin: 0 auto;
-    display: block;
-    background: #23B4F7 !important;
-    transition: all 0.8s cubic-bezier(0.810, -0.330, 0.345, 1.375);
-    transition-delay: 0.2s;
-}
-
-#sidebarCollapse:hover span {
-    background: #69DC00 !important;	
-}
-
-#sidebarCollapse span:first-of-type {
-    transform: rotate(45deg) translate(2px, 2px);
-}
-#sidebarCollapse span:nth-of-type(2) {
-    opacity: 0;
-}
-#sidebarCollapse span:last-of-type {
-    transform: rotate(-45deg) translate(1px, -1px);
-}
-
-#sidebarCollapse.active span {
-    transform: none;
-    opacity: 1;
-    margin: 5px auto;
-}
-
-#home-header {
-	color: #fff !important;	
-	text-align: center;
-	text-shadow: 1px 1px 10px #000, 0 0 30px #69DC00, 0 0 10px #999;
 }
 
 .asteriskField {
@@ -241,6 +274,7 @@ span.logo2
 
 .btn-dark {
 	color: #23B4F7 !important;
+    background-color: #525354 !important;	
 }
 
 .btn-dark:hover {
@@ -262,14 +296,66 @@ span.logo2
 	color: #23B4F7 !important;	
 }
 
-#graph-img img {
-	vertical-align: middle !important;
-	margin: auto;
-	text-align: center !important;
-	height: 18vw !important;
+
+.card-body2 {
+    flex: 1 1 auto !important;
+    padding: 1rem !important; 
+	width: 75% !important;
+	align-self: center !important;	
 }
 
+.card-bg-color1 {
+	background-color: #FF8A33 !important;	
+}
 
+.card-bg-color2 {
+	background-color: #96B1F1 !important;	
+}
+
+.card-bg-color3 {
+	background-color: #C9F576 !important;	
+}
+
+.card-bg-color4 {
+	background-color: #F7AED0 !important;	
+}
+
+.card-bg-color5 {
+	background-color: #E2D357 !important;	
+}
+
+.text {
+	color: "#112864";
+	font-size: 1em;
+}
+
+.col-md-4 {
+	padding-right: 0 !important;
+	padding-left: 0 !important;
+}
+
+#dashB-charts h6.text-uppercase {
+	color: white !important;
+	background-color: #69DC00 !important;
+	padding: 2px;
+}
+
+#dashB-charts.card{
+	border: 1px solid rgba(105, 220, 0, 1.25) !important;
+}
+
+.panel, .panel-heading, .panel-body {
+	background-color: #f2f2f2 !important;
+	text-align: center !important;
+	color: #525354 !important;
+}
+
+.panel {
+	border: 5px solid rgba(105, 220, 0, 1.25) !important;
+	width: 100% !important;
+	height: 100% !important;
+
+}
 
 
 
@@ -298,8 +384,54 @@ footer {
 
 
 /* ---------------------------------------------------
-    MEDIAQUERIES
+    CUSTOM MEDIAQUERIES
 ----------------------------------------------------- */
+/* Off Canvas wider at sm breakpoint */
+@media screen and (max-width: 34em) {
+  .row-offcanvas-left
+  .sidebar-offcanvas {
+    left: -45%;
+  }
+
+  .row-offcanvas-left.active {
+    left: 45%;
+    margin-left: -6px;
+  }
+  
+  .sidebar-offcanvas {
+    width: 45%;
+  }
+}
+
+/* Off Canvas sidebar at medium breakpoint */
+@media screen and (max-width: 992px) {
+
+  .row-offcanvas {
+    position: relative;
+    -webkit-transition: all 0.25s ease-out;
+    -moz-transition: all 0.25s ease-out;
+    transition: all 0.25s ease-out;
+  }
+
+  .row-offcanvas-left
+  .sidebar-offcanvas {
+    left: -33%;
+  }
+
+  .row-offcanvas-left.active {
+    left: 33%;
+    margin-left: -6px;
+  }
+
+  .sidebar-offcanvas {
+    position: absolute;
+    top: 0;
+    width: 33%;
+    height: 100%;
+  }
+}
+
+
 @media (max-width: 768px) {
 
     #sidebar.active {
@@ -362,76 +494,4 @@ footer {
 	
 }
 
-
-
-
-/* ---------------------------------------------------
-    GAUGE STYLE
------------------------------------------------------ */
-.chart-gauge,
-.chart-gauge2
-{
-	width: 25vw;
-	height: 22vh;
-	display: block;
-	margin: auto;
- } 
- 
-.chart-first
-{
-	fill: #f5f242;
-	/* fill: #66AB8C; */
-}
-
-.chart-second
-{
-	fill: red;
-}
-
-.needle, .needle-center
-{
-	fill: #000000;
-}
-
-.text {
-	color: "#112864";
-	font-size: 1em;
-}
-
-
-
-
-/* ---------------------------------------------------
-   ***** D3 Pie-Bar Chart Style *****
------------------------------------------------------ */
-#chartset path {  stroke: #fff; }
-#chartset path:hover {  opacity:0.9; }
-#chartset .bar rect:hover {  fill:red; }
-#chartset .axis {  font: 10px sans-serif; }
-#chartset .legend tr{    border-bottom:1px solid grey; }
-#chartset .legend tr:first-child{    border-top:1px solid grey; }
-
-#chartset .axis path,
-#chartset .axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
-}
-
-#chartset .x.axis path {  display: none; }
-#chartset .legend{
-	margin-bottom:26px;
-	margin-left:16px;
-	display:inline-block;
-	border-collapse: collapse;
-	border-spacing: 0px;
-}
-#chartset .legend td{
-	padding:4px 5px;
-	vertical-align:bottom;
-}
-#chartset .legendCost, .legendPerc{
-	align:right;
-	width:50px;
-}
 

@@ -4,7 +4,7 @@
 	<div class="container-fluid">				
 		<div class="row">
 			<div class="col">
-				<h6 class="float-left">{{ user.get_short_name }}'s Dashboard</h6>
+				<h5 class="float-left">{{ user.get_short_name }}'s Dashboard</h5>
 				<small class="float-right"><i>Today is {{ currentDate }}</i></small>
 			</div>
 		</div>
@@ -19,7 +19,7 @@
 			
 				<!--Alert Div/--> 				
 				<div class="alert alert-warning fade collapse" role="alert" id="myAlert">
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close"> 
 						<span aria-hidden="true">×</span>
 						<span class="sr-only">Close</span>
 					</button>
@@ -27,88 +27,101 @@
 				</div>
 				<!--/Alert Div-->
 				
-				<!--START ASSOCIATE DASHBOARD INFO/-->	
-				<div class="container-fluid">				
-					<div class="row">			
-						<div class="col-xl-3 col-sm-6 py-2">
-							<div class="card card-bg-color1 text-white h-100">
+				<!--START ASSOCIATE DASHBOARD INFO-->	
+				<div id="dashA-charts" class="container-fluid">
+					<!--Case Info section/-->
+					<div class="row">						
+					<div class="col-md-3 col-sm-12">
+						<div id="dashA-cards-row" class="row ">
+						<div class="col-md-12">							
+							<div class="card text-white card-bg-color1 h-75 mb-3">
 								<div class="card-body card-bg-color1">
 									<div class="rotate">
-										<i class="fas fa-user fa-5x"></i>
+										<i class="fas fa-user fa-4x"></i>
 									</div>
 									<h6 class="text-uppercase">My Open Cases</h6>
 									<h1 class="display-4">{{ cardValues.0 }}</h1>
 								</div>
 							</div>
 						</div>
-						<div class="col-xl-3 col-sm-6 py-2">
-							<div class="card text-white card-bg-color2 h-100">
-								<div class="card-body card-bg-color2">
+						<div class="col-md-12">
+							<div class="card text-white card-bg-color4 h-75 mb-3">
+								<div class="card-body card-bg-color4">
 									<div class="rotate">
-										<i class="fas fa-user-friends fa-5x"></i>
+										<i class="fas fa-user-friends fa-4x"></i>
 									</div>
 									<h6 class="text-uppercase">Team Open Cases</h6>
 									<h1 class="display-4">{{ cardValues.1 }}</h1>
 								</div>
 							</div>
 						</div>
-						<div class="col-xl-3 col-sm-6 py-2">
-							<div class="card text-white card-bg-color3 h-100">
+						<div class="col-md-12">
+							<div class="card text-white card-bg-color3 h-75 mb-3">
 								<div class="card-body card-bg-color3">
 									<div class="rotate">
-										<i class="fas fa-users fa-5x"></i>
+										<i class="fas fa-users fa-4x"></i>
 									</div>
 									<h6 class="text-uppercase">All HR Open Cases</h6>
 									<h1 class="display-4">{{ cardValues.2 }}</h1>
 								</div>
 							</div>
 						</div>
-						<div class="col-xl-3 col-sm-6 py-2">
-							<div class="card text-white card-bg-color4 h-100">
-								<div class="card-body card-bg-color4">
-									<div class="rotate">
-										<i class="fas fa-suitcase fa-5x"></i>
-									</div>
-									<h6 class="text-uppercase">Team YTD Case Total </h6>
-									<h1 class="display-4">{{ cardValues.3 }}</h1>
+						</div>											
+					</div>	
+					<!--/Case Info section ends-->				
+					<!--Gauge & Graphs section/-->					
+					<div class="col-md-9 col-sm-12">
+						<div class="row">
+						
+						<div class="col-md-6 col-sm-12 chart-col">
+							<div class="card card-inverse text-center">
+								<div class="card-body gauge-card">
+									<h6 class="text-uppercase">my case % within sla</h6>
+									<div><canvas class="gauge-chart" id="gaugeChart1"></canvas></div>
+									<h6><strong>{{ gaugeValues.0 }}%</strong></h6>
+								</div>
+							</div>						
+						</div>							
+						<div class="col-md-6 col-sm-12 chart-col">						
+							<div class="card card-inverse text-center">
+								<div class="card-body gauge-card">
+									<h6 class="text-uppercase">my team's case % within sla</h6>
+									<div><canvas class="gauge-chart" id="gaugeChart2"></canvas></div>
+									<h6><strong>{{ gaugeValues.1 }}%</strong></h6>							
 								</div>
 							</div>
-						</div>				
-					</div>
-				</div>
-				<!--/row-->
-				<hr>
-				<div class="container-fluid">				
-					<div class="row">
-						<div class="col">
-							<div class="card card-inverse card-success text-center">
-								<div class="card-body2">
-									<h6 class="text-uppercase">my case percentage within sla</h6>
-									<div><canvas id="gaugeChart1"></canvas></div>
-									<h6>{{ gaugeValues.0 }}%</h6>
+						</div>						
+						<div class="col-md-6 col-sm-12 chart-col">							
+							<div class="card card-inverse text-center">
+								<div class="card-body graph-card">
+									<h6 class="text-uppercase">my team's open case % by tier</h6>
+									<div class="pie-chart"><canvas id="pieChart1"></canvas></div>
 								</div>
-							</div>
+							</div>								
 						</div>
-						<div class="col">						
-							<div class="card card-inverse card-success text-center">
-								<div class="card-body2">
-									<h6 class="text-uppercase">my team's case percentage within sla</h6>
-									<div><canvas id="gaugeChart2"></canvas></div>
-									<h6>{{ gaugeValues.1 }}%</h6>								
+						<div class="col-md-6 col-sm-12 chart-col">						
+							<div class="card card-inverse text-center">
+								<div class="card-body graph-card">
+									<h6 class="text-uppercase">team ytd satisfaction scores</h6>
+									<div class="pie-chart"><canvas id="pieChart2"></canvas></div>								
 								</div>
-							</div>
-						</div>	
+							</div>														
+						</div>
+										
+						</div>							
+					</div>								
 					</div>
-				</div>			
-				<!--/row-->	
+					<!--/Gauge & Graphs section ends-->					
+				</div>									
 			</div>
-			<!--/main col ends-->
+			<!--/Main col ends-->
 		</div>
 	</div>
 	<!--/.container-->
 {% endblock %}
 
 {% block gauge_script%}
+	var gaugeNums = {{ gaugeValues|safe }}
 	var opts = {
 	  lines: 12,
 	  angle: 0,
@@ -145,8 +158,6 @@
 	  },
 	};
 
-	var gaugeNums = {{ gaugeValues|safe }}
-
 	var target1 = document.getElementById('gaugeChart1');
 	var gauge1 = new Gauge(target1).setOptions(opts);
 	gauge1.maxValue = 100;
@@ -158,4 +169,96 @@
 	gauge2.maxValue = 100;
 	gauge2.animationSpeed = 32;
 	gauge2.set(gaugeNums[1]);
+{% endblock %}
+
+
+{% block dashPieChart1-script %}
+	var tierNums = {{ tierValues|safe }}
+	var ctx = document.getElementById('pieChart1');
+	var myChart = new Chart(ctx, {
+		type: 'doughnut',
+		data: {
+			labels: ['Tier 1', 'Tier 2'],
+			datasets: [{
+				label: '# of Cases By Tier',
+				data: tierNums,
+				backgroundColor: [
+					'rgba(102, 0, 204, 0.75)',
+					'rgba(0, 179, 134, 0.75)',
+				],
+				borderColor: ['#fff'],
+				borderWidth: 1
+			}]
+		},
+		options: {
+			responsive: true,
+			maintainAspectRatio: false,
+			legend: {
+				display: true,
+				position: 'right',
+			},
+			plugins: {
+				datalabels: {
+					formatter: (value, ctx) => {
+						let sum = 0;
+						let dataArr = ctx.chart.data.datasets[0].data;
+						dataArr.map(data => {
+							sum += data;
+						});
+						let percentage = (value * 100 / sum).toFixed(0) + "%";
+						return percentage;
+					},
+					color: '#fff',
+				}
+			}
+		}
+	});
+{% endblock %}
+
+
+{% block dashPieChart2-script %}
+	var scoreValues = {{ scoreValues|safe }}
+	console.log(scoreValues)
+	
+	var ctx2 = document.getElementById('pieChart2');
+	var myChart = new Chart(ctx2, {
+		type: 'doughnut',
+		data: {
+			labels: ['Unknown', 'Dissatisfied', 'Satisfied', 'Highly Satisfied'],
+			datasets: [{
+				label: 'Satisfaction Scores',
+				data: scoreValues,
+				backgroundColor: [
+					'rgba(140, 140, 140, 0.75)',
+					'rgba(204, 0, 0, 0.75)',
+					'rgba(115, 153, 0, 0.75)',
+					'rgba(153, 204, 0, 0.75)',					
+				],
+				borderColor: ['#fff'],
+				borderWidth: 1
+			}]
+		},
+		options: {
+			responsive: true,
+			maintainAspectRatio: false,
+			legend: {
+				display: true,
+				position: 'right',
+			},
+			plugins: {
+				datalabels: {
+					formatter: (value, ctx2) => {
+						let sum = 0;
+						let dataArr = ctx2.chart.data.datasets[0].data;
+						dataArr.map(data => {
+							sum += data;
+						});
+						let percentage = (value * 100 / sum).toFixed(0) + "%";
+						return percentage;
+					},
+					color: '#fff',
+				}
+			}
+		}
+	});
 {% endblock %}

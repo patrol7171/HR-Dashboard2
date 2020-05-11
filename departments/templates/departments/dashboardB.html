@@ -4,7 +4,7 @@
 	<div class="container-fluid">				
 		<div class="row">
 			<div class="col">
-				<h6 class="float-left">{{ user.get_short_name }}'s Dashboard</h6>
+				<h5 class="float-left">{{ user.get_short_name }}'s Dashboard</h5>
 				<small class="float-right"><i>Today is {{ currentDate }}</i></small>
 			</div>
 		</div>
@@ -27,129 +27,93 @@
 				</div>
 				<!--/Alert Div-->
 				
-				<!--START MANAGEMENT DASHBOARD INFO/-->	
-				<div class="container-fluid">
+				<!--START MANAGEMENT DASHBOARD INFO/-->				
+				<div id="dashB-charts" class="container-fluid">
+					<h6 class="text-center section-title">CASE TOTAL PERCENTAGES WITHIN SLA PER HR TEAM</h6>
+					<!--row/-->						
 					<div class="row">
-						<div class="col py-2">
-							<div class="card text-white crd-bg-color1 h-100">
-								<div class="card-body card-bg-color1">
-									<div class="rotate">
-										<i class="fas fa-suitcase fa-4x"></i>
-									</div>
-									<h6 class="text-uppercase">TESTING 1 </h6>
-									<h1 class="display-4">10</h1>
+						<div class="col-sm">
+							<div class="card text-center">
+								<h6 class="text-uppercase heading1">attrition & retention<br>(a&r)</h6>
+								<div class="pt-3">							
+									<canvas id="gaugeChart1" class="gauge-chart"></canvas>
 								</div>
+								<small class="text-uppercase py-2"><strong>{{ gaugeValues.0 }}%</strong> of cases within SLA</small>
 							</div>
-						</div>
-						<div class="col py-2">
-							<div class="card text-white card-bg-color2 h-100">
-								<div class="card-body card-bg-color2">
-									<div class="rotate">
-										<i class="fas fa-suitcase fa-4x"></i>
-									</div>
-									<h6 class="text-uppercase">TESTING 2 </h6>
-									<h1 class="display-4">100</h1>
+						</div>					
+						<div class="col-sm">							
+							<div class="card text-center">
+								<h6 class="text-uppercase heading2">compensation & benefits<br>(c&b)</h6>
+								<div class="pt-3">
+									<canvas id="gaugeChart2" class="gauge-chart"></canvas>
 								</div>
-							</div>
-						</div>
-						<div class="col py-2">
-							<div class="card text-white card-bg-color3 h-100">
-								<div class="card-body card-bg-color3">
-									<div class="rotate">
-										<i class="fas fa-suitcase fa-4x"></i>
-									</div>
-									<h6 class="text-uppercase">TESTING 3 </h6>
-									<h1 class="display-4">100</h1>
-								</div>
-							</div>
-						</div>				
-						<div class="col py-2">
-							<div class="card text-white card-bg-color4 h-100">
-								<div class="card-body card-bg-color4">
-									<div class="rotate">
-										<i class="fas fa-suitcase fa-4x"></i>
-									</div>
-									<h6 class="text-uppercase">TESTING 4 </h6>
-									<h1 class="display-4">10</h1>
-								</div>
+								<small class="text-uppercase py-2"><strong>{{ gaugeValues.1 }}%</strong> of cases within SLA</small>
 							</div>
 						</div>						
-						<div class="col py-2">
-							<div class="card text-white card-bg-color5 h-100">
-								<div class="card-body card-bg-color5">
-									<div class="rotate">
-										<i class="fas fa-suitcase fa-4x"></i>
-									</div>
-									<h6 class="text-uppercase">TESTING 5 </h6>
-									<h1 class="display-4">100</h1>
+						<div class="col-sm">							
+							<div class="card text-center">
+								<h6 class="text-uppercase heading3">employee relations<br>(er)</h6>
+								<div class="pt-3">	
+									<canvas id="gaugeChart3" class="gauge-chart"></canvas>
 								</div>
-							</div>
-						</div>	
-					</div>						
-				</div>					
-				<!--/row-->
-				<hr>
-				<p class="text-uppercase text-center">Percentage of Open Cases Within SLA</p>
-				<div class="container-fluid">				
-					<div class="row">					
-						<div class="w-sm-20">
-							<div class="card card-inverse card-success text-center">
-								<div class="card-body">
-									<small class="text-uppercase">attrition & <br/>retention</small>
-									<div>
-										<canvas id="gaugeChart1" height="75" width="150"></canvas>
-									</div>
-									<h6><small>##%</small></h6>
-								</div>
-							</div>
-						</div>
-						<div class="w-sm-20">							
-							<div class="card card-inverse card-success text-center">
-								<div class="card-body">
-									<small class="text-uppercase">compensation & <br/>benefits</small>
-									<div>
-										<canvas id="gaugeChart2" height="75" width="150"></canvas>
-									</div>
-									<h6><small>##%</small></h6>
-								</div>
-							</div>
-						</div>									
-						<div class="w-sm-20">							
-							<div class="card card-inverse card-success text-center">
-								<div class="card-body">
-									<small class="text-uppercase">employee <br/>relations</small>
-									<div>
-										<canvas id="gaugeChart3" height="75" width="150"></canvas>
-									</div>
-									<h6><small>##%</small></h6>
-								</div>
+								<small class="text-uppercase py-2"><strong>{{ gaugeValues.2 }}%</strong> of cases within SLA</small>
 							</div>
 						</div>		
-						<div class="w-sm-20">							
-							<div class="card card-inverse card-success text-center">
-								<div class="card-body">
-									<small class="text-uppercase">recruitment & <br/>selection</small>
-									<div>
-										<canvas id="gaugeChart4" height="75" width="150"></canvas>
-									</div>
-									<h6><small>##%</small></h6>
+						<div class="col-sm">							
+							<div class="card text-center">
+								<h6 class="text-uppercase heading4">recruitment & selection<br>(r&s)</h6>
+								<div class="pt-3">	
+									<canvas id="gaugeChart4" class="gauge-chart"></canvas>
 								</div>
+								<small class="text-uppercase py-2"><strong>{{ gaugeValues.3 }}%</strong> of cases within SLA</small>
 							</div>
 						</div>									
-						<div class="w-sm-20">							
-							<div class="card card-inverse card-success text-center">
-								<div class="card-body">
-									<small class="text-uppercase">talent <br/>management</small>
-									<div>
-										<canvas id="gaugeChart5" height="75" width="150"></canvas>
-									</div>
-									<h6><small>##%</small></h6>
+						<div class="col-sm">						
+							<div class="card text-center">
+								<h6 class="text-uppercase heading5">training & development<br>(t&d)</h6>
+								<div class="pt-3">	
+									<canvas id="gaugeChart5" class="gauge-chart"></canvas>
 								</div>
+								<small class="text-uppercase py-2"><strong>{{ gaugeValues.4 }}%</strong> of cases within SLA</small>
 							</div>
 						</div>						
 					</div>
-				</div>					
-				<!--/row-->				
+					<!--/row-->
+					<!--row/-->				
+					<div class="row">	
+						<div class="col-md-4 col-sm-12">							
+							<div class="panel panel-default">
+								<div class="panel-heading text-uppercase pt-2">open case totals by tier per team</div>
+								<div class="panel-body">
+									<div class="bar-chart px-3 pb-3">
+										<canvas id="barChart1"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>					
+						<div class="col-md-4 col-sm-12">							
+							<div class="panel panel-default">
+								<div class="panel-heading text-uppercase pt-2">open case percentages per team</div>
+								<div class="panel-body">
+									<div class="pie-chart px-3 pb-3">
+										<canvas id="pieChart"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>	
+						<div class="col-md-4 col-sm-12">							
+							<div class="panel panel-default">
+								<div class="panel-heading text-uppercase pt-2">ytd satisfaction scores per team</div>
+								<div class="panel-body">
+									<div class="bar-chart px-3 pb-3">
+										<canvas id="barChart2"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>	
+					</div>
+					<!--/row-->			
+				</div>								
 				<!--/End Dashboard Info-->	
 				
 			</div>
@@ -159,7 +123,10 @@
 	<!--/.container-->
 {% endblock %}
 
-{% block gauge_script%}
+
+{% block gauge_script %}
+	var gaugeNums = {{ gaugeValues|safe }};
+	
 	var opts = {
 	  lines: 12,
 	  angle: 0,
@@ -196,8 +163,6 @@
 	  },
 	};
 
-	var gaugeNums = {{ gaugeValues|safe }}
-
 	var target1 = document.getElementById('gaugeChart1');
 	var gauge1 = new Gauge(target1).setOptions(opts);
 	gauge1.maxValue = 100;
@@ -229,3 +194,158 @@
 	gauge5.set(gaugeNums[4]);
 {% endblock %}
 
+
+{% block dashBarChart1-script %}
+	var tier1Nums = {{ tier1Values|safe }};
+	var tier2Nums = {{ tier2Values|safe }};
+	
+	var ctx = document.getElementById('barChart1');
+	var myChart = new Chart(ctx, {
+		type: 'horizontalBar',
+		data: {
+			labels: ['A&R', 'C&B', 'ER', 'R&S', 'T&D'],
+			datasets: [{
+				label: 'Tier 1',
+				data: tier1Nums,
+				backgroundColor: 'rgba(102, 0, 204, 0.75)',
+				borderColor: 'rgba(102, 0, 204, 1)',
+				borderWidth: 1
+			}, {
+				label: 'Tier 2',
+				data: tier2Nums,
+				backgroundColor: 'rgba(0, 179, 134, 0.75)',
+				borderColor: 'rgba(0, 179, 134, 1)',
+				borderWidth: 1			
+			}]
+		},
+		options: {
+			responsive: true,
+			maintainAspectRatio: false,
+			legend: { display: true },
+			plugins: {
+				datalabels: { display: false }
+			},			
+			scales: {
+				xAxes: [{
+					stacked: true
+				}],
+				yAxes: [{
+					stacked: true
+				}]		
+			}
+		}
+	});
+{% endblock %}
+
+
+{% block dashPieChart1-script %}
+	var tierTotalNums = {{ tierTotalValues|safe }};
+	
+	var ctx2 = document.getElementById('pieChart');
+	new Chart(ctx2, {
+		type: 'doughnut',
+		data: {
+		  labels: ['A&R', 'C&B', 'ER', 'R&S', 'T&D'],
+		  datasets: [{
+			label: "Open Cases",
+            backgroundColor: [
+                'rgba(255, 51, 153, 0.75)',
+                'rgba(54, 162, 235, 0.75)',
+                'rgba(255, 159, 64, 0.75)',
+                'rgba(226, 211, 87, 0.75)',
+                'rgba(153, 102, 255, 0.75)',
+            ],
+            borderColor: ['#fff'],			
+			data: tierTotalNums
+		  }]
+		},
+		options: {
+			responsive: true,
+			maintainAspectRatio: false,
+			tooltips: { enabled: true },
+			title: { display: false },
+			legend: {
+				display: true,
+				position: 'right',
+			},
+			plugins: {
+				datalabels: {
+					formatter: (value, ctx2) => {
+						let sum = 0;
+						let dataArr = ctx2.chart.data.datasets[0].data;
+						dataArr.map(data => {
+							sum += data;
+						});
+						let percentage = (value * 100 / sum).toFixed(0) + "%";
+						return percentage;
+					},
+					color: '#fff',
+				}
+			}
+		}
+	});
+{% endblock %}
+
+
+{% block dashBarChart2-script %}
+	var scoreValues = {{ scoreValues|safe }};
+	var scores = Object.values(scoreValues);
+	var unknownScores = [scores[0]['0 - Unknown'],scores[1]['0 - Unknown'],scores[2]['0 - Unknown'],scores[3]['0 - Unknown'],scores[4]['0 - Unknown']];	
+	var dissatisfiedScores = [scores[0]['1 - Unsatisfied'],scores[1]['1 - Unsatisfied'],scores[2]['1 - Unsatisfied'],scores[3]['1 - Unsatisfied'],scores[4]['1 - Unsatisfied']];
+	var satisfiedScores = [scores[0]['2 - Satisfied'],scores[1]['2 - Satisfied'],scores[2]['2 - Satisfied'],scores[3]['2 - Satisfied'],scores[4]['2 - Satisfied']];
+	var highSatisfiedScores = [scores[0]['3 - Highly satisfied'],scores[1]['3 - Highly satisfied'],scores[2]['3 - Highly satisfied'],scores[3]['3 - Highly satisfied'],scores[4]['3 - Highly satisfied']];
+	
+	var ctx3 = document.getElementById('barChart2');
+	var myChart2 = new Chart(ctx3, {
+		type: 'horizontalBar',
+		data: {
+			labels: ['A&R', 'C&B', 'ER', 'R&S', 'T&D'],
+			datasets: [{
+				label: 'Unknown',
+				data: unknownScores,
+				backgroundColor: 'rgba(204, 204, 204, 0.75)',
+				borderColor: 'rgba(204, 204, 204, 1)',
+				borderWidth: 1
+			}, {
+				label: 'Dissatisfied',
+				data: dissatisfiedScores,
+				backgroundColor: 'rgba(204, 0, 0, 0.75)',
+				borderColor: 'rgba(204, 0, 0, 1)',
+				borderWidth: 1
+			}, {
+				label: 'Satisfied',
+				data: satisfiedScores,
+				backgroundColor: 'rgba(115, 153, 0, 0.75)',
+				borderColor: 'rgba(115, 153, 0, 1)',
+				borderWidth: 1
+			}, {
+				label: 'Highly Satisfied',
+				data: highSatisfiedScores,
+				backgroundColor: 'rgba(153, 204, 0, 0.75)',
+				borderColor: 'rgba(153, 204, 0, 1)',
+				borderWidth: 1			
+			}]
+		},
+		options: {
+			responsive: true,
+			maintainAspectRatio: false,
+			legend: { 
+				display: true,
+				labels: {
+					fontSize: 9
+				}				
+			},
+			plugins: {
+				datalabels: { display: false }
+			},			
+			scales: {
+				xAxes: [{
+					stacked: true
+				}],
+				yAxes: [{
+					stacked: true
+				}]		
+			}
+		}
+	});
+{% endblock %}
