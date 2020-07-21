@@ -8,86 +8,82 @@
 	<div class="container-fluid" id="main">
 		<div class="row row-offcanvas row-offcanvas-left">
 			<!--Main col starts/-->
-			<div class="col main mt-3">
-			
-				<!--Alert Div/--> 				
-				<div class="alert alert-warning fade collapse" role="alert" id="myAlert">
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-						<span aria-hidden="true">×</span>
-						<span class="sr-only">Close</span>
-					</button>
-					<strong>Holy guacamole!</strong> This is an example of an alert.
-				</div>
-				<!--/Alert Div-->
-				
-				<div class="row placeholders mb-3">
-					<div class="col-6 col-sm-3 placeholder text-center">
-						<img src="https://placehold.it/200/dddddd/fff?text=1" class="mx-auto img-fluid rounded-circle" alt="Generic placeholder thumbnail">
-						<h4>Responsive</h4>
-						<span class="text-muted">Device agnostic</span>
-					</div>
-					<div class="col-6 col-sm-3 placeholder text-center">
-						<img src="https://placehold.it/200/e4e4e4/fff?text=2" class="mx-auto img-fluid rounded-circle" alt="Generic placeholder thumbnail">
-						<h4>Frontend</h4>
-						<span class="text-muted">UI / UX oriented</span>
-					</div>
-					<div class="col-6 col-sm-3 placeholder text-center">
-						<img src="https://placehold.it/200/d6d6d6/fff?text=3" class="mx-auto img-fluid rounded-circle" alt="Generic placeholder thumbnail">
-						<h4>HTML5</h4>
-						<span class="text-muted">Standards-based</span>
-					</div>
-					<div class="col-6 col-sm-3 placeholder text-center">
-						<img src="https://placehold.it/200/e0e0e0/fff?text=4" class="center-block img-fluid rounded-circle" alt="Generic placeholder thumbnail">
-						<h4>Framework</h4>
-						<span class="text-muted">CSS and JavaScript</span>
-					</div>
-				</div>
-				<!--/row-->
+			<div class="col main mt-1">				
+				<!-- Nav tabs -->
+				<ul class="nav nav-tabs" role="tablist">
+					<li class="nav-item">
+						<a class="nav-link {{ casework_tab }}" href="{% url 'compensation' 1 %}" role="tab"><small>Casework Data</small></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link {{ cssurveys_tab }}" href="{% url 'compensation' 2 %}" role="tab"><small>CS Survey Results</small></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link {{ teamdata_tab }}" href="{% url 'compensation' 3 %}" role="tab" id="map-tab"><small>Other Team Metrics</small></a>
+					</li>
+				</ul>
 
-				<hr>
-				<div class="mb-3">
-					<div class="card-deck">
-						<div class="card card-inverse card-success text-center">
-							<div class="card-body">
-								<blockquote class="card-blockquote">
-									<p>It's really good news that the new Bootstrap 4 now has support for CSS 3 flexbox.</p>
-									<cite title="Source Title">Faster</cite>
-								</blockquote>
-							</div>
-						</div>
-						<div class="card card-inverse card-danger text-center">
-							<div class="card-body">
-								<blockquote class="card-blockquote">
-									<p>The Bootstrap 3.x element that was called "Panel" before, is now called a "Card".</p>
-									<cite title="Source Title">Sense</cite>
-								</blockquote>
-							</div>
-						</div>
+				<!-- Tab panes -->
+				<div class="tab-content tab-bkgrnd2">
+					<!--Tab1/-->		
+					<div role="tabpanel" class="tab-pane {{ casework_tab }}" id="casework1">
+						{% include "departments/casework.html" with caseList=case_list %}					
 					</div>
-				</div>
-				<!--/row-->
-				
-				<div class="mb-3">
-					<div class="card-deck">
-						<div class="card card-inverse card-success text-center">
-							<div class="card-body">
-								<blockquote class="card-blockquote">
-									<p>It's really good news that the new Bootstrap 4 now has support for CSS 3 flexbox.</p>
-									<cite title="Source Title">Faster</cite>
-								</blockquote>
-							</div>
-						</div>
-						<div class="card card-inverse card-danger text-center">
-							<div class="card-body">
-								<blockquote class="card-blockquote">
-									<p>The Bootstrap 3.x element that was called "Panel" before, is now called a "Card".</p>
-									<cite title="Source Title">Sense</cite>
-								</blockquote>
-							</div>
-						</div>
+					<!--/Tab1-->
+					<!--Tab2/-->
+					<div role="tabpanel" class="tab-pane {{ cssurveys_tab }}" id="cssurveys1">
+						{% include "departments/cssurveys.html" %}
 					</div>
+					<!--/Tab2-->
+					<!--Tab3/-->
+					<div role="tabpanel" class="tab-pane {{ teamdata_tab }}" id="teamdata1">
+						<div class="container-fluid">
+							<div class="row my-1">							
+								<div class="col-lg-6 col-md-6">								
+									<div class="row placeholders mb-2">
+										<div class="col-12 text-center">
+											<div class="placeholder text-center">
+										<div class="boxplot-chart">
+											<div class="spinner" id="mySpinnerA2"></div>
+											<canvas id="hourlyPayByDept-boxplotChart" class="box-plot-canvas" width="525" height="450"></canvas>
+										</div>
+										<h6 class="chart-title">Hourly Pay Distribution By Dept</h6>
+											</div>
+										</div>
+									</div>
+								</div>								
+								<div class="col-lg-6 col-md-6">
+									<div class="row">	
+										<div class="row placeholders mb-1">
+											<div class="col-12 text-center">
+												<div class="placeholder text-center">
+													<div class="boxplot-chart">
+														<div class="spinner" id="mySpinnerB2"></div>
+														<canvas id="hourlyPayByGender-boxplotChart" class="box-plot-canvas" width="525" height="150"></canvas>
+													</div>
+													<h6 class="chart-title">Hourly Pay Distribution By Gender</h6>
+												</div>
+											</div>											
+										</div>	
+										<div class="row placeholders mb-1">
+											<div class="col-12 text-center">
+												<div class="placeholder text-center">
+													<div class="boxplot-chart">
+														<div class="spinner" id="mySpinnerC2"></div>
+														<canvas id="hourlyPayByRace-boxplotChart" class="box-plot-canvas" width="525" height="260"></canvas>
+													</div>
+													<h6 class="chart-title">Hourly Pay Distribution By Race</h6>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>	
+					<!--/Tab3-->
 				</div>
-				<!--/row-->
+				<!-- Tab panes end -->
 				
 			</div>
 			<!--/main col ends-->
@@ -96,3 +92,26 @@
 	<!--/.container-->
 {% endblock %}
 
+
+{% block deptCharts-script %}
+	{% include "departments/dept_js.html" with requestor_list=requestor_list priority_list=priority_list case_avg=case_avg scores_info=scores_info dissatisfied_info=dissatisfied_info unknown_info=unknown_info %}
+
+	var hourlyPayDistribByDept = {{ payDistrib_dept|safe }};
+	var hourlyPayDistribByDeptLabels = Object.keys(hourlyPayDistribByDept);
+	var hourlyPayDistribByDeptData = Object.values(hourlyPayDistribByDept);
+	
+	var hourlyPayDistribByGender = {{ payDistrib_gender|safe }};
+	var hourlyPayDistribByGenderLabels = Object.keys(hourlyPayDistribByGender);
+	var hourlyPayDistribByGenderData = Object.values(hourlyPayDistribByGender);
+
+	var hourlyPayDistribByRace = {{ payDistrib_race|safe }};
+	var hourlyPayDistribByRaceLabels = Object.keys(hourlyPayDistribByRace);
+	var hourlyPayDistribByRaceData = Object.values(hourlyPayDistribByRace);	
+
+	function compensationDeptOnlyCharts() {
+		boxplot_graph1('hourlyPayByDept-boxplotChart', hourlyPayDistribByDeptLabels, hourlyPayDistribByDeptData, '#4251f5', boxPlot_options2);
+		boxplot_graph1('hourlyPayByGender-boxplotChart', hourlyPayDistribByGenderLabels, hourlyPayDistribByGenderData, '#eb5234', boxPlot_options2);
+		boxplot_graph1('hourlyPayByRace-boxplotChart', hourlyPayDistribByRaceLabels, hourlyPayDistribByRaceData, '#42f5e3', boxPlot_options2);		
+	}
+	startCompensationChartsTimeOut();	
+{% endblock %}

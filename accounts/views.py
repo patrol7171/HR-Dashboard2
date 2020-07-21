@@ -21,7 +21,6 @@ def login(request):
 
 
 def logout(request):
-    #TEMPORARY
     return render(request, 'accounts/home.html')
 
 

@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block heading%}
+{% block heading %}
 	<h6 class='mt-2'>EMPLOYEE / SITE LOCATER</h6>
 {% endblock %}
 
@@ -8,112 +8,219 @@
 	<div class="container-fluid" id="main">
 		<div class="row row-offcanvas row-offcanvas-left">
 			<!--Main col starts/-->
-			<div class="col main mt-3">
-			
-				<!--Alert Div/--> 				
-				<div class="alert alert-warning fade collapse" role="alert" id="myAlert">
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-						<span aria-hidden="true">×</span>
-						<span class="sr-only">Close</span>
-					</button>
-					<strong>Holy guacamole!</strong> This is an example of an alert.
-				</div>
-				<!--/Alert Div-->
+			<div class="col main mt-1">						
 				
-				<p class="lead">
-					It's the 4th generation of this popular responsive framework. Bootstrap 4 will include some interesting 
-					new features such as flexbox, 5 grid sizes and larger font sizes.
-				</p>				
+				<!-- Nav tabs -->
+				<ul class="nav nav-tabs" role="tablist">
+					<li class="nav-item">
+						<a class="nav-link {{ emplist_tab }}" href="{% url 'locater' 1 %}" role="tab"><small>Employee List By Work Site</small></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link {{ worksites_tab }}" href="{% url 'locater' 2 %}" role="tab"><small>Work Sites Info</small></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link {{ emphomelist_tab }}" href="{% url 'locater' 3 %}" role="tab" id="map-tab"><small>Employee Locations By Zipcode</small></a>
+					</li>					
+				</ul>
 
-				<div class="mb-3">
-					<div class="card-deck">
-						<div class="card card-inverse card-danger text-center">
-							<div class="card-body">
-								<blockquote class="card-blockquote">
-									<p>The Bootstrap 3.x element that was called "Panel" before, is now called a "Card".</p>
-									<cite title="Source Title">Sense</cite>
-								</blockquote>
+				<!-- Tab panes -->
+				<div class="tab-content tab-bkgrnd3">
+					<!--TAB1/-->					
+					<div role="tabpanel" class="tab-pane {{ emplist_tab }}" id="employeesitelist1">
+						<div class="container-fluid" id="employeeList">
+							<div class="row">							
+								<div class="col-lg-3 col-md-4 col-sm-12 mt-2">
+									<div class="card">
+										<div class="card-body">
+											<h6 class="card-title">WORK GROUPS LIST</h6>
+											<form method="POST" action="{% url 'locater' 1 %}">
+												{% csrf_token %}
+												<small>{{ form1.as_p }}</small>
+												<button type="submit" id="select_site" class="btn btn-primary btn-sm">Select Site</button>
+											</form>
+										</div>
+									</div>								
+								</div>								
+								<div class="col-lg-9 col-md-8 col-sm-12 mt-2">
+									<div class="row">	
+									<p class="card-title">CURRENT EMPLOYEES IN THIS WORK GROUP:</p>
+										<div class="table-responsive">
+											<table class="table table-sm table-striped">
+												<thead class="thead-inverse">
+													<tr>
+														<th><small><b>ID#</b></small></th>
+														<th><small><b>Employee Name</b></small></th>
+														<th><small><b>Department</b></small></th>
+														<th><small><b>Position</b></small></th>
+														<th><small><b>Employment Status</b></small></th>
+													</tr>
+												</thead>
+												<tbody>												
+												{% for emp in empList %}
+													<tr>
+														<td><small>{{ emp.employeenumber }}</small></td>
+														<td><small>{{ emp.firstname }} {{ emp.lastname }}<small></td>
+														<td><small>{{ emp.department }}</small></td>
+														<td><small>{{ emp.position }}</small></td>
+														<td><small>{{ emp.employmentstatus }}</small></td>
+													</tr>
+												{% endfor %}
+												</tbody>												
+											</table>
+											{% include "departments/paginator.html" with itemList=empList %}
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<!--/row-->
-				
-				<div class="row my-4">
-					<div class="col-lg-3 col-md-4">
-						<div class="card">
-							<div class="card-body">
-								<h4 class="card-title">Layouts</h4>
-								<p class="card-text">Flexbox provides simpler, more flexible layout options like vertical centering.</p>
-								<a href="#" class="btn btn-primary">Button</a>
+					<!--/TAB1-->
+					<!--TAB2/-->					
+					<div role="tabpanel" class="tab-pane {{ worksites_tab }}" id="worksites1">
+						<div class="row">
+							<div class="col-lg-4 col-md-5 col-sm-12 mt-2">
+								<div class="card">
+									<div class="card-body">
+										<h5 class="card-title">WORK SITE LOCATIONS</h5>
+										<div class="list-group" id="siteList2" role="tablist">
+										{% for site in sitesList %}
+											{% if site.worksiteid == 1 %}
+											<a class="list-group-item list-group-item-action active" data-toggle="list" href="#site{{ site.worksiteid }}" role="tab">{{ site.sitename }}</a>
+											{% else %}
+											<a class="list-group-item list-group-item-action" data-toggle="list" href="#site{{ site.worksiteid }}" role="tab">{{ site.sitename }}</a>
+											{% endif %}
+										{% endfor %}
+										</div>
+									</div>
+								</div>
+							</div>					
+							<div class="col-lg-8 col-md-7 col-sm-12 mt-2">
+								<div class="tab-content">
+								{% for site in sitesList %}
+									{% if site.worksiteid == 1 %}
+									<div class="tab-pane active" id="site{{ site.worksiteid }}" role="tabpanel">
+									{% else %}
+									<div class="tab-pane" id="site{{ site.worksiteid }}" role="tabpanel">
+									{% endif %}
+										<div class="row">
+											<div class="card-deck">
+												<div class="card card-inverse card-danger text-center">
+													<div class="card-body">
+														<img src="/static/{{ site.image }}" class="mx-auto img-fluid"><br>
+														<lead>{{ site.sitename }}</lead><br>
+														<small>{{ site.address }}</small> | 
+														<small>{{ site.city }}, {{ site.state }} {{ site.zipcode }}</small> | 
+														<small>{{ site.mainphone }}</small>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								{% endfor %}
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="col-lg-9 col-md-8">
-						<div class="table-responsive">
-							<table class="table table-striped">
-								<thead class="thead-inverse">
-									<tr>
-										<th>#</th>
-										<th>Label</th>
-										<th>Header</th>
-										<th>Column</th>
-										<th>Data</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>1,001</td>
-										<td>responsive</td>
-										<td>bootstrap</td>
-										<td>cards</td>
-										<td>grid</td>
-									</tr>
-									<tr>
-										<td>1,002</td>
-										<td>rwd</td>
-										<td>web designers</td>
-										<td>theme</td>
-										<td>responsive</td>
-									</tr>
-									<tr>
-										<td>1,005</td>
-										<td>navbar</td>
-										<td>sticky</td>
-										<td>jumbtron</td>
-										<td>header</td>
-									</tr>
-									<tr>
-										<td>1,006</td>
-										<td>collapse</td>
-										<td>affix</td>
-										<td>submenu</td>
-										<td>flexbox</td>
-									</tr>
-									<tr>
-										<td>1,007</td>
-										<td>layout</td>
-										<td>examples</td>
-										<td>themes</td>
-										<td>grid</td>
-									</tr>
-									<tr>
-										<td>1,008</td>
-										<td>migration</td>
-										<td>bootstrap 4</td>
-										<td>flexbox</td>
-										<td>design</td>
-									</tr>
-								</tbody>
-							</table>
+						<!--/row-->
+					</div>	
+					<!--/TAB2-->
+					<!--TAB3/-->					
+					<div role="tabpanel" class="tab-pane {{ emphomelist_tab }}" id="employeehomelist1">
+						<div class="row">							
+							<div class="col-lg-3 col-md-4 col-sm-12 mt-2">
+								<div class="row-fluid">
+									<div class="card mt-1">
+										<div class="card-body">											
+											<h6 class="card-title">EMPLOYEE LOCATIONS *</h6>
+											<div class="list-group" id="stateList" role="tablist">
+											{% for state in state_list %}
+												{% if forloop.first %}
+												<a class="list-group-item list-group-item-action active" data-toggle="list" href="#state{{ forloop.counter }}" role="tab"><small>{{ state }}</small></a>
+												{% else %}
+												<a class="list-group-item list-group-item-action" data-toggle="list" href="#state{{ forloop.counter }}" role="tab"><small>{{ state }}</small></a>
+												{% endif %}
+											{% endfor %}
+											</div>
+										</div>
+									</div>		
+									<div class="card card-inverse bg-inverse mt-1">
+										<div class="card-body">
+											<h6 class="card-title">MARKER LEGEND</h6>
+											<div class="table-responsive">
+												<table id="marker-legend" class="table table-sm">
+													<tbody>												
+														<tr>
+															<td><small><img src='https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png' height='22'></small></td>
+															<td><small>Executive Office<small></td>
+														</tr>
+														<tr>
+															<td><small><img src='https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-gold.png' height='22'></small></td>
+															<td><small>Admin Offices<small></td>
+														</tr>
+														<tr>
+															<td><small><img src='https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-violet.png' height='22'></small></td>
+															<td><small>IT - Information Systems<small></td>
+														</tr>
+														<tr>
+															<td><small><img src='https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png' height='22'></small></td>
+															<td><small>Software Engineering<small></td>
+														</tr>
+														<tr>
+															<td><small><img src='https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-orange.png' height='22'></small></td>
+															<td><small>Production<small></td>
+														</tr>
+														<tr>
+															<td><small><img src='https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png' height='22'></small></td>
+															<td><small>Sales<small></td>
+														</tr>													
+													</tbody>												
+												</table>
+											</div>
+										</div>
+									</div>										
+								</div>
+							</div>
+							<div class="col-lg-9 col-md-8 col-sm-12 mt-2">
+								<div class="row-fluid mt-1">
+									<div class="tab-content" id="leaflet-maps" onload="map1Resize()">
+									{% for state in state_list %}
+										{% if forloop.first %}
+										<div class="tab-pane active" id="state{{ forloop.counter }}" role="tabpanel">
+										{% else %}
+										<div class="tab-pane" id="state{{ forloop.counter }}" role="tabpanel">
+										{% endif %}
+											<div class="row">
+												<div class="card-deck">
+													<div class="card card-inverse card-danger text-center">
+														<div class="card-body">
+															<div class="state-map" id="mapid{{ forloop.counter }}" style="width:800px; height:400px;"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									{% endfor %}
+									</div>
+								</div>
+							</div>							
 						</div>
+						<small><i>* "Remote" employees are not included</i></small>						
 					</div>
-				</div>
-				<!--/row-->
+					<!--/TAB3-->					
+				</div>				
 				
 			</div>
 			<!--/main col ends-->
 		</div>
 	</div>
 	<!--/.container-->
+{% endblock %}
+
+{% block map-script %}
+	$(document).ready(function(){			
+		function map1Resize() {
+			setTimeout(function(){ mymap1.invalidateSize(); }, 2000);
+		}
+		map1Resize();		
+		{{ maps_js_code|safe }}
+	});	
 {% endblock %}

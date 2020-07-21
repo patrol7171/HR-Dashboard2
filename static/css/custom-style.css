@@ -5,7 +5,6 @@
 body {
     font-family: 'Poppins', sans-serif;
     background: #fafafa;
-	min-height:100vh;
 }
 
 html {
@@ -62,24 +61,12 @@ a:hover {
     margin: 40px 0;
 }
 
-.account-img {
-    height: 38px;
-    width: 38px;
-    margin-right: 15px;
-	border: 2px solid #23B4F7 !important;
-}
-
-
-.account-img:hover {
-	border: 2px solid #69DC00 !important;
-}
-  
   
 
 
 
 /* ---------------------------------------------------
-    SIDEBAR STYLE
+    SIDEBAR STYLES
 ----------------------------------------------------- */
 
 .wrapper {
@@ -123,6 +110,7 @@ a:hover {
     font-size: 0.9em;
     display: block;
 }
+
 #sidebar ul li a:hover {
     color: #21AAEA;
     background: #fff;
@@ -132,7 +120,6 @@ a:hover {
     color: #fff;
     background: #23B4F7;
 }
-
 
 #sidebarCollapse {
     width: 40px;
@@ -177,7 +164,6 @@ a:hover {
 	text-align: center;
 	text-shadow: 1px 1px 10px #000, 0 0 30px #69DC00, 0 0 10px #999;
 }
-
 
 a[data-toggle="collapse"] {
     position: relative;
@@ -234,8 +220,32 @@ span.logo2
 
 
 /* ---------------------------------------------------
-    CONTENT STYLE
+    CONTENT STYLES
 ----------------------------------------------------- */
+
+.account-img {
+    height: 38px;
+    width: 38px;
+    margin-right: 15px;
+	border: 2px solid #23B4F7 !important;
+}
+
+.account-img:hover {
+	border: 2px solid #69DC00 !important;
+}
+  
+#content {
+    width: 100% !important;
+    padding: 10px;
+    min-height: 88vh;
+    transition: all 0.3s;
+}
+
+.card-deck {
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+}
+
 .card {
     overflow:hidden;
 }
@@ -259,13 +269,6 @@ span.logo2
     -o-transform: rotate(-44deg);
     -ms-transform: rotate(-44deg);
     transform: rotate(-44deg);
-}
-
-#content {
-    width: 100%;
-    padding: 20px;
-    min-height: 88vh;
-    transition: all 0.3s;
 }
 
 .asteriskField {
@@ -296,12 +299,25 @@ span.logo2
 	color: #23B4F7 !important;	
 }
 
+.gauge-card {
+	width: 80% !important;
+	align-self: center !important;
+	margin-bottom: -15px !important;
+}
+
+.graph-card {
+	width: 95% !important;
+	align-self: center !important;
+}
+
+.chart-col {
+	padding: 5px !important;
+}
 
 .card-body2 {
     flex: 1 1 auto !important;
-    padding: 1rem !important; 
-	width: 75% !important;
-	align-self: center !important;	
+    padding: .75rem !important; 
+	align-self: center !important;
 }
 
 .card-bg-color1 {
@@ -309,19 +325,19 @@ span.logo2
 }
 
 .card-bg-color2 {
-	background-color: #96B1F1 !important;	
+	background-color: #8080FF !important;	
 }
 
 .card-bg-color3 {
-	background-color: #C9F576 !important;	
+	background-color: #F7AED0 !important;
 }
 
 .card-bg-color4 {
-	background-color: #F7AED0 !important;	
+	background-color: #E2D357 !important;	
 }
 
 .card-bg-color5 {
-	background-color: #E2D357 !important;	
+	background-color: #00E68A !important;
 }
 
 .text {
@@ -329,34 +345,103 @@ span.logo2
 	font-size: 1em;
 }
 
-.col-md-4 {
+#dashA-cards-row.row {
+	margin-bottom: -30px !important;
+}
+
+#dashB-charts div.col-md-4 {
 	padding-right: 0 !important;
 	padding-left: 0 !important;
 }
 
 #dashB-charts h6.text-uppercase {
-	color: white !important;
-	background-color: #69DC00 !important;
+	color: #666666 !important;
 	padding: 2px;
+	margin-bottom: 0rem;
 }
 
-#dashB-charts.card{
-	border: 1px solid rgba(105, 220, 0, 1.25) !important;
+#dashB-charts h6.text-uppercase.heading1 {
+	background-color: rgba(255, 51, 153, .5) !important;
+	border: .5px solid rgba(255, 51, 153, .75) !important;		
+}
+
+#dashB-charts h6.text-uppercase.heading2 {
+	background-color: rgba(54, 162, 235, .5) !important;
+	border: .5px solid rgba(54, 162, 235, .75) !important;	
+}
+
+#dashB-charts h6.text-uppercase.heading3 {
+	background-color: rgba(255, 159, 64, .5) !important;
+	border: .5px solid rgba(255, 159, 64, .75) !important;		
+}
+
+#dashB-charts h6.text-uppercase.heading4 {
+	background-color: rgba(226, 211, 87, .5) !important;
+	border: .5px solid rgba(226, 211, 87, .75) !important;		
+}
+
+#dashB-charts h6.text-uppercase.heading5 {
+	background-color: rgba(153, 102, 255, .5) !important;
+	border: .5px solid rgba(153, 102, 255, .75) !important;		
+}
+
+#dashB-charts div.card.text-center {
+	border: 1px solid rgba(153, 153, 153, .5) !important;
+	border-radius: 0 !important;
+}
+
+#dashB-charts div.col-sm {
+	padding: 0 0 !important;
+}
+
+#dashB-charts div.row.case-info {
+	margin: 0 !important;
+}
+
+#dashB-charts div.col-4.gauge-totals {	
+	color: #fff !important;
+	border: 1px solid rgba(153, 153, 153, .5) !important;
+	text-align: center !important;
+	line-height: 1 !important;
+	padding: 0 !important;
+}
+
+#dashB-charts div.panel-body {
+	height: 75% !important;
 }
 
 .panel, .panel-heading, .panel-body {
-	background-color: #f2f2f2 !important;
+	background-color: #fff !important;
 	text-align: center !important;
 	color: #525354 !important;
 }
 
 .panel {
-	border: 5px solid rgba(105, 220, 0, 1.25) !important;
+	border: 1px solid rgba(153, 153, 153, .5) !important;
 	width: 100% !important;
 	height: 100% !important;
-
 }
 
+.section-title {
+	color: #999 !important;
+}
+
+.list-group-item {
+	position: relative;
+	display: block;
+	padding: 2px 10px;
+	margin-bottom: -1px;
+}
+
+.list-group-item.active {
+	background-color: #23B4F7 !important;
+	border-color: #23B4F7 !important;
+}
+
+.form-group label,
+.input placeholder {
+	color: #999;
+}
 
 
 
@@ -366,18 +451,21 @@ span.logo2
 ----------------------------------------------------- */
 
 footer {
-	width: 100%;
-    background-color: #525354;
-    color: white;
+    width: 100% !important;
+    position: fixed !important;
+    left: 0 !important;
+    bottom: 0 !important;
+    background-color: #525354 !important;
+    color: white !important;
   }
   
-  footer a:hover{
-      color: #69DC00 !important;
-  }
-  
-  footer p{
-      color: #e4e4e4 !important;
-  }
+footer a:hover{
+    color: #69DC00 !important;
+}
+
+footer p{
+    color: #e4e4e4 !important;
+}
 
 
 
@@ -387,7 +475,7 @@ footer {
     CUSTOM MEDIAQUERIES
 ----------------------------------------------------- */
 /* Off Canvas wider at sm breakpoint */
-@media screen and (max-width: 34em) {
+@media screen (max-width: 34em) {
   .row-offcanvas-left
   .sidebar-offcanvas {
     left: -45%;
@@ -404,7 +492,7 @@ footer {
 }
 
 /* Off Canvas sidebar at medium breakpoint */
-@media screen and (max-width: 992px) {
+@media screen (max-width: 992px) {
 
   .row-offcanvas {
     position: relative;

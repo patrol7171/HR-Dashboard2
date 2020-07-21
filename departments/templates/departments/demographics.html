@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+
 {% block heading %}
 	<h6 class='mb-1'>OUR EMPLOYEE DEMOGRAPHICS</h6>
 {% endblock %}
@@ -9,81 +10,79 @@
 	<div class="container-fluid" id="main">
 		<div id= "main-row" class="row row-offcanvas row-offcanvas-left">
 			<!--Main col starts/-->
-			<div class="col main mt-3">
+			<div class="col main mt-3 tab-bkgrnd1">
 			
-				<!--Alert Div/--> 				
-				<div class="alert alert-warning fade collapse" role="alert" id="myAlert">
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-						<span aria-hidden="true">×</span>
-						<span class="sr-only">Close</span>
-					</button>
-					<strong>Holy guacamole!</strong> This is an example of an alert.
+				<div class="row">
+					<div class="col-md-12 mx-1">
+						<div class="tab">
+						  <button class="tablinks active" onclick="showChart(event, 'empstatus')" id="defaultOpen">Employment Status - All Records</button>
+						  <button class="tablinks" onclick="showChart(event, 'staffCntByDept')">Staff Totals By Department</button>
+						  <button class="tablinks" onclick="showChart(event, 'staffGenderPerc')">Staff Gender Percentages</button>  
+						  <button class="tablinks" onclick="showChart(event, 'staffRacePerc')">Staff Racial Percentages</button> 
+						  <button class="tablinks" onclick="showChart(event, 'staffMaritalPerc')">Staff Marital Status Percentages</button> 
+						  <button class="tablinks" onclick="showChart(event, 'staffRaceByDept')">Staff Racial Distribution By Department</button> 
+						  <button class="tablinks" onclick="showChart(event, 'staffMaritalByDept')">Staff Marital Status By Department</button> 
+						  <button class="tablinks" onclick="showChart(event, 'staffAgeDistrib')">Staff Age Distribution</button> 
+						  <button class="tablinks" onclick="showChart(event, 'staffLocalesByDept')">Staff Locations By Department</button>						  
+						</div>
+						<div class="container tab-wrapper">
+							<div id="empstatus" class="tabcontent">
+								<h4 class="vtab-chart text-center">Employment Status - All Records On File</h4>
+								<div class="pie-chart">			
+									<canvas id="empStat-pieChart" width="400" height="400"></canvas>
+								</div>
+							</div>
+							<div id="staffCntByDept" class="tabcontent">
+								<h4 class="vtab-chart text-center">Current Staff Totals By Department</h4>
+								<div class="bar-chart">
+									<canvas id="deptTotals-barChart" width="400" height="400"></canvas>
+								</div>		
+							</div>
+							<div id="staffGenderPerc" class="tabcontent">
+								<h4 class="vtab-chart text-center">Current Staff Gender Percentages</h4>
+								<div class="pie-chart">		
+									<canvas id="genderCount-pieChart" width="400" height="400"></canvas>
+								</div>		
+							</div>
+							<div id="staffRacePerc" class="tabcontent">
+								<h4 class="vtab-chart text-center">Current Staff Racial Percentages</h4>
+								<div class="pie-chart">
+									<canvas id="raceCount-pieChart" width="400" height="400"></canvas>
+								</div>
+							</div>
+							<div id="staffMaritalPerc" class="tabcontent">
+								<h4 class="vtab-chart text-center">Current Staff Marital Status Percentages</h4>
+								<div class="pie-chart">
+									<canvas id="maritalStat-pieChart" width="400" height="400"></canvas>
+								</div>
+							</div>
+							<div id="staffRaceByDept" class="tabcontent">
+								<h4 class="vtab-chart text-center">Current Staff Racial Distribution By Department</h4>
+								<div class="bar-chart">
+									<canvas id="raceByDept-barChart" width="400" height="400"></canvas>
+								</div>
+							</div>
+							<div id="staffMaritalByDept" class="tabcontent">
+								<h4 class="vtab-chart text-center">Current Staff Marital Status By Department</h4>
+								<div class="bar-chart">
+									<canvas id="maritalByDept-barChart" width="400" height="400"></canvas>
+								</div>
+							</div>
+							<div id="staffAgeDistrib" class="tabcontent">
+								<h4 class="vtab-chart text-center">Current Staff Age Distribution</h4>
+								<div class="bar-chart">
+									<canvas id="ageCount-barChart" width="400" height="400"></canvas>
+								</div>
+							</div>
+							<div id="staffLocalesByDept" class="tabcontent">
+								<h4 class="vtab-chart text-center">Current Staff Locations By Department</h4>
+								<div class="bar-chart">
+									<canvas id="localesCount-barChart" width="400" height="400"></canvas>
+								</div>
+							</div>
+						</div>
+					</div>	
 				</div>
-				<!--/Alert Div-->
-
-				<div class="card-deck mb-3">
-					<div class="card text-center" style="max-width:45%">
-						<div class="card-body text-center">
-							<h6 class="card-title">Employment Status - All Records On File<h6>
-							<div class="pie-chart"><canvas id="empStat-pieChart"></canvas></div>
-						</div>
-					</div>
-					<div class="card text-center" style="max-width:55%">
-						<div class="card-body graph-card text-center">
-							<h6 class="card-title">Staff Totals By Department</h6>
-							<div class="bar-chart"><canvas id="deptTotals-barChart"></canvas></div>
-						</div>
-					</div>
-				</div>
-				<!--/row-->
-
-				<div class="card-deck mb-3">
-					<div class="card text-center" style="max-width:27%">
-						<div class="card-body text-center">
-							<h6 class="card-title">Staff Gender Percentages</h6>
-							<div class="pie-chart"><canvas id="genderCount-pieChart"></canvas></div>
-						</div>
-					</div>
-					<div class="card text-center" style="max-width:46%">
-						<div class="card-body text-center">
-							<h6 class="card-title">Staff Racial Percentages</h6>
-							<div class="pie-chart"><canvas id="raceCount-pieChart"></canvas></div>
-						</div>
-					</div>
-					<div class="card text-center" style="max-width:27%">
-						<div class="card-body text-center">
-							<h6 class="card-title">Staff Marital Status Percentages</h6>
-							<div class="pie-chart"><canvas id="maritalStat-pieChart"></canvas></div>
-						</div>
-					</div>
-				</div>
-				<!--/card-columns-->
-			
-				<div class="card-deck mb-3">
-					<div class="card text-center" style="max-width:55%">
-						<div class="card-body text-center">
-							<h6 class="card-title">Staff Racial Distribution By Department<h6>
-							<div class="bar-chart"><canvas id="raceByDept-barChart"></canvas></div>
-						</div>
-					</div>
-					<div class="card text-center" style="max-width:45%">
-						<div class="card-body text-center">
-							<h6 class="card-title">Staff Gender Distribution By Department</h6>
-							<div class="bar-chart"><canvas id="maritalByDept-barChart"></canvas></div>
-						</div>
-					</div>
-				</div>
-				<!--/row-->	
-				
-				<div class="card-deck mb-3">
-					<div class="card text-center" style="width:100%">
-						<div class="card-body text-center">
-							<h6 class="card-title">Staff Age Distribution</h6>
-							<div class="bar-chart"><canvas id="ageCount-barChart"></canvas></div>
-						</div>
-					</div>
-				</div>
-				<!--/row-->				
 			
 			</div>
 			<!--/main col ends-->
@@ -94,6 +93,7 @@
 
 
 {% block demographicsCharts-script %}
+	<!-- from view -->
 	var statusValues = {{ statusValues|safe }};
 	var deptCountValues = {{ deptCountValues|safe }};
 	var genderValues = {{ genderValues|safe }};
@@ -102,7 +102,14 @@
 	var raceByDeptValues = {{ raceByDeptValues|safe }};
 	var maritalStatByDeptValues = {{ maritalStatByDeptValues|safe }};
 	var ageCountValues = {{ ageCountValues|safe }};
-		
+	var localesByDeptInfo = {{ localesByDeptInfo|safe }};
+	
+	<!-- ******************************** TESTING ***************************************** -->
+	console.log(raceByDeptValues);
+	console.log(raceByDeptValues);
+	console.log(localesByDeptInfo[0]);
+	
+	<!-- chart variables setup -->	
 	var statusSum1 = statusValues[0] + statusValues[1]
 	var statusSum2 = statusValues[2] + statusValues[3] + statusValues[4]
 		
@@ -110,7 +117,7 @@
 	var msbdv = maritalStatByDeptValues;
 	var teamA = 'Admin Offices';
 	var teamB = 'IT - Information Systems';
-	var teamC = "Production       ";
+	var teamC = "Production";
 	var teamD = 'Sales';
 	var teamE = 'Software Engineering';
 	var teamF = 'Executive Office';
@@ -139,9 +146,21 @@
 	var singNums = [msbdv[teamA][mStatD],msbdv[teamB][mStatD],msbdv[teamC][mStatD],msbdv[teamD][mStatD],msbdv[teamE][mStatD],msbdv[teamF][mStatD]];
 	var widNums = [msbdv[teamA][mStatE],msbdv[teamB][mStatE],msbdv[teamC][mStatE],msbdv[teamD][mStatE],msbdv[teamE][mStatE],msbdv[teamF][mStatE]];
 	
-	var ageCountValLabels = ageCountValues[0]
-	var ageCountValData = ageCountValues[1]
-		
+	var ageCountValLabels = ageCountValues[0];
+	var ageCountValData = ageCountValues[1];
+	
+	var localesByDeptValues = localesByDeptInfo[0];
+	var stateLabels = localesByDeptInfo[1];
+	var localesByDeptLabels = Object.keys(localesByDeptValues);
+	var localesByDeptObjVal = Object.values(localesByDeptValues);
+	var localesByDeptData = formatHorizontalBarChartData(localesByDeptObjVal, stateLabels);
+	var locales_colors = getColorsList(stateLabels);
+	hbar_graph1('localesCount-barChart', localesByDeptLabels, localesByDeptData, stateLabels, locales_colors, '#fff', horizStackedBarGraph_options4);
+	
+	var seq = palette('tol-sq', 10);
+
+
+
 
 	<!-- chart IDs -->	
 	var ctx1 = document.getElementById('empStat-pieChart');
@@ -153,7 +172,6 @@
 	var ctx7 = document.getElementById('maritalByDept-barChart');
 	var ctx8 = document.getElementById('ageCount-barChart');
 	
-	var seq = palette('tol-sq', 10);
 
 
 
@@ -161,11 +179,11 @@
 	var options1 = {
 		responsive: true,
 		maintainAspectRatio: false,
-		cutoutPercentage: 30,
+		cutoutPercentage: 40,
 		legend: {
 			display: true,
 			position: 'right',
-			labels: { fontSize: 8 }			
+			labels: { fontSize: 12 }			
 		},
 		tooltips: {
 			callbacks: {
@@ -188,6 +206,20 @@
 					return percentage;
 				},
 				color: '#000',
+			},
+			doughnutlabel: {
+				labels: [
+				  {
+					text: getTotal,
+					font: { size: '40'},
+					color: '#ccc'
+				  },
+				  {
+					text: 'TOTAL',
+					font: { size: '15'},
+					color: '#ccc'
+				  },
+				]
 			}
 		}
 	}
@@ -208,7 +240,7 @@
 			display: true,
 			position: 'right',
 			labels: { 
-				fontSize: 7
+				fontSize: 12
 			}
 		},
 		plugins: {
@@ -226,6 +258,20 @@
 			},
 			colorschemes: {
 				scheme: 'brewer.DarkTwo8'
+			},
+			doughnutlabel: {
+				labels: [
+				  {
+					text: getTotal,
+					font: { size: '40'},
+					color: '#ccc'
+				  },
+				  {
+					text: 'TOTAL',
+					font: { size: '15'},
+					color: '#ccc'
+				  },
+				]
 			}
 		}
 	}
@@ -236,7 +282,7 @@
 		legend: { 
 			display: true,
 			position: 'bottom',
-			labels: { fontSize: 8 }
+			labels: { fontSize: 12 }
 		},
 		plugins: {
 			datalabels: { display: false }
@@ -334,37 +380,37 @@
 			data: aaNums,
 			backgroundColor: 'gold',
 			borderColor: '#fff',
-			borderWidth: 1
+			borderWidth: 2
 		}, {
 			label: 'Asian',
 			data: aNums,
 			backgroundColor: 'olive',
 			borderColor: '#fff',
-			borderWidth: 1
+			borderWidth: 2
 		}, {
 			label: 'Black or African American',
 			data: bNums,
 			backgroundColor: 'magenta',
 			borderColor: '#fff',
-			borderWidth: 1
+			borderWidth: 2
 		}, {
 			label: 'Hispanic',
 			data: hNums,
 			backgroundColor: 'teal',
 			borderColor: '#fff',
-			borderWidth: 1	
+			borderWidth: 2	
 		}, {
 			label: 'Two or more races',
 			data: tNums,
 			backgroundColor: 'coral',
 			borderColor: '#fff',
-			borderWidth: 1
+			borderWidth: 2
 		}, {
 			label: 'White',
 			data: wNums,
 			backgroundColor: 'purple',
 			borderColor: '#fff',
-			borderWidth: 1				
+			borderWidth: 2				
 		}]
 	}
 
@@ -375,41 +421,41 @@
 			data: divNums,
 			backgroundColor: 'gold',
 			borderColor: '#fff',
-			borderWidth: 1
+			borderWidth: 2
 		}, {
 			label: 'Married',
 			data: marNums,
 			backgroundColor: 'olive',
 			borderColor: '#fff',
-			borderWidth: 1
+			borderWidth: 2
 		}, {
 			label: 'Separated',
 			data: sepNums,
 			backgroundColor: 'magenta',
 			borderColor: '#fff',
-			borderWidth: 1
+			borderWidth: 2
 		}, {
 			label: 'Single',
 			data: singNums,
 			backgroundColor: 'coral',
 			borderColor: '#fff',
-			borderWidth: 1
+			borderWidth: 2
 		}, {
 			label: 'Widowed',
 			data: widNums,
 			backgroundColor: 'purple',
 			borderColor: '#fff',
-			borderWidth: 1
+			borderWidth: 2
 		}]
 	}
 	
-		var ageData = {
+	var ageData = {
 		labels: ageCountValLabels,
 		datasets: [{
 			label: 'Age Total',
 			data: ageCountValData,
 			backgroundColor: poolColors(ageCountValData.length),
-			borderColor: '#ccc',
+			borderColor: blue_menu_color,
 			borderWidth: 2,
 
 		}]
@@ -466,5 +512,24 @@
 		data: ageData,
 		options: options5
 	});
-	
+
+
+
+
+	<!-- Vertical tabs function -->
+	function showChart(evt, chartName) {
+	  var i, tabcontent, tablinks;
+	  tabcontent = document.getElementsByClassName("tabcontent");
+	  for (i = 0; i < tabcontent.length; i++) {
+		tabcontent[i].style.display = "none";
+	  }
+	  tablinks = document.getElementsByClassName("tablinks");
+	  for (i = 0; i < tablinks.length; i++) {
+		tablinks[i].className = tablinks[i].className.replace(" active", "");
+	  }
+	  document.getElementById(chartName).style.display = "block";
+	  evt.currentTarget.className += " active";
+	}
+
+	document.getElementById("defaultOpen").click();	
 {% endblock %}

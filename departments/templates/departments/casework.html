@@ -1,0 +1,70 @@
+
+<div class="container-fluid">
+	<div class="row my-1">
+		<div class="col-lg-6 col-md-5">
+			<div class="row-fluid mt-1">
+				<div class="row placeholders mb-3">
+					<div class="col-6 col-md-6 col-sm-12 placeholder text-center">						
+						<div class="pie-chart">
+							<canvas id="pieChart1" width="220" height="225"></canvas>
+						</div>
+						<h6 class="chart-title">YTD Requestor Types</h6>
+					</div>
+					<div class="col-6 col-md-6 col-sm-12 placeholder text-center">
+						<div class="pie-chart">
+							<canvas id="pieChart2" width="220" height="225"></canvas>
+						</div>
+						<h6 class="chart-title">YTD Priority Levels</h6>
+					</div>
+				</div>	
+				<div class="row placeholders mb-1">
+					<div class="col-12 text-center">
+						<div class="placeholder text-center">
+							<div class="pie-chart">
+								<canvas id="lineChart1" width="510" height="175"></canvas>
+							</div>
+							<h6 class="chart-title">Average Number of Days to Close Cases Per Month - 2020</h6>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-6 col-md-7">
+			<div class="row mt-1">	
+			<p><b>CURRENT OPEN TEAM CASES: </b><small><i> (cases out of SLA are in red)</i></small></p>
+				<div class="table-responsive">
+					<table class="table table-sm table-striped">
+						<thead class="thead-inverse">
+							<tr>
+								<th><small><b>Case ID#</b></small></th>
+								<th><small><b>Tier Level</b></small></th>
+								<th><small><b>Assigned To</b></small></th>
+								<th><small><b>Date Created</b></small></th>
+							</tr>
+						</thead>
+						<tbody>
+						{% for case in caseList %}
+							{% if case.OO_SLA%}
+								<tr>
+									<td><small class="red-text">{{ case.caseid }}</small></td>
+									<td><small class="red-text">{{ case.tierlevel }}</small></td>
+									<td><small class="red-text">{{ case.caseowner }}</small></td>
+									<td><small class="red-text">{{ case.datereceived }}</small></td>
+								</tr>								
+							{% else %}
+								<tr>
+									<td><small>{{ case.caseid }}</small></td>
+									<td><small>{{ case.tierlevel }}</small></td>
+									<td><small>{{ case.caseowner }}</small></td>
+									<td><small>{{ case.datereceived }}</small></td>
+								</tr>								
+							{% endif %}
+						{% endfor %}
+						</tbody>
+					</table>
+					{% include "departments/paginator.html" with itemList=caseList %}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

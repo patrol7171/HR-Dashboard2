@@ -5,6 +5,7 @@
 body {
     font-family: 'Poppins', sans-serif;
     background: #fafafa;
+	height: 100%;
 }
 
 html {
@@ -61,7 +62,10 @@ a:hover {
     margin: 40px 0;
 }
 
-  
+a.nav-link.active {
+	font-weight: bold;
+}
+
 
 
 
@@ -222,6 +226,7 @@ span.logo2
 /* ---------------------------------------------------
     CONTENT STYLES
 ----------------------------------------------------- */
+
 .account-img {
     height: 38px;
     width: 38px;
@@ -234,8 +239,8 @@ span.logo2
 }
   
 #content {
-    width: 100% !important;
-    padding: 10px;
+    width: 90% !important;
+    padding: 20px;
     min-height: 88vh;
     transition: all 0.3s;
 }
@@ -425,27 +430,158 @@ span.logo2
 	color: #999 !important;
 }
 
+.list-group-item {
+	position: relative;
+	display: block;
+	padding: 2px 10px;
+	margin-bottom: -1px;
+}
+
+.list-group-item.active {
+	background-color: #23B4F7 !important;
+	border-color: #23B4F7 !important;
+}
+
+.form-group label,
+.input placeholder {
+	color: #999;
+}
+
+div#tab-col.col-lg-4.col-md-5,
+div#tab-col.col-lg-8.col-md-7 {
+	padding: 0 0 !important;
+}
+
+li.active.page-link {
+	color: #fff !important;
+	background-color: #23B4F7 !important;
+}
+
+div#employeeList.container-fluid {
+	padding: 0px !important;	
+}
+
+table#marker-legend.table.table-sm {
+	margin-bottom: 0px !important;	
+}
+
+.red-text {
+	color: red !important;
+}
+
+.table-responsive {
+	width: 98% !important;
+}
+
+.tab-bkgrnd2 {
+	background-color: #fff;
+	margin-top: -0.25rem !important;
+}
+
+.tab-bkgrnd3 {
+	background-color: #fff;
+
+}
+
+
+
+
+
+
+
+/* ---------------------------------------------------
+    VERTICAL TABS
+----------------------------------------------------- */
+.tab-wrapper {
+	border-top: 1px solid #ccc;
+}
+
+.tab {
+  float: right;
+  border: none;
+  background-color: #fafafa;
+  width: 25%;
+  height: 400px;
+}
+
+.tab button {
+  display: block;
+  background-color: #fafafa;
+  color: #999;
+  padding: 18px 12px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-style: solid;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  outline: none;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.1s;
+  font-size: 12px;
+}
+
+.tab button:hover {
+  background-color: #ddd;
+}
+
+.tab button.active {
+  background-color: #fff !important;
+  color: #21AAEA;
+  border: 1px solid #ccc;
+  border-style: solid solid solid none;
+  background-color: #fff;
+  font-weight: bold;
+}
+
+.tabcontent {
+  float: left;
+  padding: 0px 12px;
+  border: none;
+  width: 75%;
+  border-left: none;
+  background-color: #fff;
+  height: 400px;
+}
+
+.vtab-chart {
+	margin-top: 2rem;
+	margin-bottom: 1.75rem;
+	align: text-center;
+	color: #999;
+}
+
+.tab-bkgrnd1 {
+	background-color: #fff;
+	height: 500px;
+	padding-right: 0 !important;
+	padding-left: 0 !important;
+	margin-right: -0.75rem !important;
+	margin-left: -0.25rem !important;
+}
+
 
 
 
 /* ---------------------------------------------------
     FOOTER STYLE
 ----------------------------------------------------- */
-
 footer {
-	width: 100%;
-    background-color: #525354;
-    color: white;
+    width: 100% !important;
+    position: fixed !important;
+    left: 0 !important;
+    bottom: 0 !important;
+    background-color: #525354 !important;
+    color: white !important;
   }
   
-  footer a:hover{
-      color: #69DC00 !important;
-  }
-  
-  footer p{
-      color: #e4e4e4 !important;
-  }
+footer a:hover{
+    color: #69DC00 !important;
+}
 
+footer p{
+    color: #e4e4e4 !important;
+}
 
 
 

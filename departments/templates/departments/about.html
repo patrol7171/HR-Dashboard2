@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{% block bg-style %}
+	<style>
+		html {
+			height: 100% !important;
+		}
+		
+		#content {
+			height: 100% !important; 
+			background-image: url("/static/hr_home_pic.png") !important;
+			background-repeat: no-repeat !important;
+			background-size: cover !important;
+			color:#69DC00 !important;
+		}
+
+		.bg-box {
+			margin: auto;
+			background-color: rgba(14, 13, 13, 0.4);
+			line-height: 1; 
+			backdrop-filter: blur(5px);  
+			-webkit-backdrop-filter: blur(5px);
+			max-width: 90%;
+			max-height: 80%;
+			padding: 5vh 5vh;
+		}
+		
+		p {
+			color: #fff;
+		}
+	</style>
+{% endblock %}
+
+{% block content %}
+	<div class='bg-box pt-5'>
+    	<h2>About</h2>
+		<p>
+			Dental Magic, Inc. is a small company based in Boston, MA that offers both dental services and dental-related products. This web app is a prototype of a 
+			Data Analytics portal requested  by the company's HR Department.  Below is a list of some of the HR Team users from which to choose in order to log into the site. 
+			Portal views are based on employee type (Management or Associate).
+		</p>
+		<lead>Management:</lead>
+		<div class="table-responsive"> 
+			<table class="table table-bordered table-sm table-light">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Username</th>
+						<th>Password</th>
+						<th>Job Title</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Henry Wheeler</td>
+						<td>cS11zRLx</td>
+						<td>abcd1234</td>
+						<td>HR Operations Team Manager</td>
+					</tr>		
+				</tbody>
+			</table>
+		</div>
+		<br>
+		<lead>Associates:</lead>
+		<div class="table-responsive"> 
+			<table class="table table-bordered table-sm table-light">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Username</th>
+						<th>Password</th>
+						<th>Job Title</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Camille Kim</td>
+						<td>tSjw2hYY</td>
+						<td>dagger</td>
+						<td>HR Specialist I (Tier 1) - Recruitment & Selection</td>
+					</tr>
+					<tr>
+						<td>Andrew Harrison</td>
+						<td>oDoCidPt</td>
+						<td>coyote</td>
+						<td>HR Specialist I (Tier 1) - Employee Relations</td>
+					</tr>	
+					<tr>
+						<td>Terra Rice</td>
+						<td>vuo1zJHG</td>
+						<td>jaguar1</td>
+						<td>HR Specialist I (Tier 1) - Attrition & Retention</td>
+					</tr>  
+					<tr>
+						<td>Josephine Graham</td>
+						<td>3vGwUNjj</td>
+						<td>gidget</td>
+						<td>HR Specialist II (Tier 2) - Training & Development</td>
+					</tr>  			
+					<tr>
+						<td>Francis Holt</td>
+						<td>m5kYwx5P</td>
+						<td>liverpool</td>
+						<td>HR Specialist II (Tier 2) - Benefits & Compensation</td>
+					</tr>				
+				</tbody>
+			</table>
+		</div>
+	</div>
+{% endblock %}

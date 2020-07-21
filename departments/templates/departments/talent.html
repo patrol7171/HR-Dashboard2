@@ -8,87 +8,68 @@
 	<div class="container-fluid" id="main">
 		<div class="row row-offcanvas row-offcanvas-left">
 			<!--Main col starts/-->
-			<div class="col main mt-3">
-			
-				<!--Alert Div/--> 				
-				<div class="alert alert-warning fade collapse" role="alert" id="myAlert">
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-						<span aria-hidden="true">×</span>
-						<span class="sr-only">Close</span>
-					</button>
-					<strong>Holy guacamole!</strong> This is an example of an alert.
-				</div>
-				<!--/Alert Div-->
-				
-				<div class="row placeholders mb-3">
-					<div class="col-6 col-sm-3 placeholder text-center">
-						<img src="https://placehold.it/200/dddddd/fff?text=1" class="mx-auto img-fluid rounded-circle" alt="Generic placeholder thumbnail">
-						<h4>Responsive</h4>
-						<span class="text-muted">Device agnostic</span>
-					</div>
-					<div class="col-6 col-sm-3 placeholder text-center">
-						<img src="https://placehold.it/200/e4e4e4/fff?text=2" class="mx-auto img-fluid rounded-circle" alt="Generic placeholder thumbnail">
-						<h4>Frontend</h4>
-						<span class="text-muted">UI / UX oriented</span>
-					</div>
-					<div class="col-6 col-sm-3 placeholder text-center">
-						<img src="https://placehold.it/200/d6d6d6/fff?text=3" class="mx-auto img-fluid rounded-circle" alt="Generic placeholder thumbnail">
-						<h4>HTML5</h4>
-						<span class="text-muted">Standards-based</span>
-					</div>
-					<div class="col-6 col-sm-3 placeholder text-center">
-						<img src="https://placehold.it/200/e0e0e0/fff?text=4" class="center-block img-fluid rounded-circle" alt="Generic placeholder thumbnail">
-						<h4>Framework</h4>
-						<span class="text-muted">CSS and JavaScript</span>
-					</div>
-				</div>
-				<!--/row-->
+			<div class="col main mt-1">
+				<!-- Nav tabs -->
+				<ul class="nav nav-tabs" role="tablist">
+					<li class="nav-item">
+						<a class="nav-link {{ casework_tab }}" href="{% url 'talent' 1 %}" role="tab"><small>Casework Data</small></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link {{ cssurveys_tab }}" href="{% url 'talent' 2 %}" role="tab"><small>CS Survey Results</small></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link {{ teamdata_tab }}" href="{% url 'talent' 3 %}" role="tab"><small>Other Team Metrics</small></a>
+					</li>
+				</ul>
 
-				<hr>
-				<div class="mb-3">
-					<div class="card-deck">
-						<div class="card card-inverse card-success text-center">
-							<div class="card-body">
-								<blockquote class="card-blockquote">
-									<p>It's really good news that the new Bootstrap 4 now has support for CSS 3 flexbox.</p>
-									<cite title="Source Title">Faster</cite>
-								</blockquote>
-							</div>
-						</div>
-						<div class="card card-inverse card-danger text-center">
-							<div class="card-body">
-								<blockquote class="card-blockquote">
-									<p>The Bootstrap 3.x element that was called "Panel" before, is now called a "Card".</p>
-									<cite title="Source Title">Sense</cite>
-								</blockquote>
-							</div>
-						</div>
+				<!-- Tab panes -->
+				<div class="tab-content tab-bkgrnd2">					
+					<!--Tab1/-->		
+					<div role="tabpanel" class="tab-pane {{ casework_tab }}" id="casework1"> 
+						{% include "departments/casework.html" with caseList=case_list %}					
 					</div>
-				</div>				
-				<!--/row-->
-				
-				<div class="mb-3">
-					<div class="card-deck">
-						<div class="card card-inverse card-success text-center">
-							<div class="card-body">
-								<blockquote class="card-blockquote">
-									<p>It's really good news that the new Bootstrap 4 now has support for CSS 3 flexbox.</p>
-									<cite title="Source Title">Faster</cite>
-								</blockquote>
-							</div>
-						</div>
-						<div class="card card-inverse card-danger text-center">
-							<div class="card-body">
-								<blockquote class="card-blockquote">
-									<p>The Bootstrap 3.x element that was called "Panel" before, is now called a "Card".</p>
-									<cite title="Source Title">Sense</cite>
-								</blockquote>
-							</div>
-						</div>
+					<!--/Tab1-->
+					<!--Tab2/-->
+					<div role="tabpanel" class="tab-pane {{ cssurveys_tab }}" id="cssurveys1">
+						{% include "departments/cssurveys.html" %}
 					</div>
+					<!--/Tab2-->
+					<!--Tab3/-->
+					<div role="tabpanel" class="tab-pane {{ teamdata_tab }}" id="teamdata1">
+						<div class="container-fluid">
+							<div class="row my-1">							
+								<div class="col-lg-4 col-md-4">									
+									<div class="row placeholders mb-2">
+										<div class="col-12 text-center">
+											<div class="placeholder text-center">
+												<div class="pie-chart">
+													<div class="spinner" id="mySpinnerA5"></div>
+													<canvas id="perfScore-pieChart" width="400" height="440"></canvas>
+												</div>
+												<h6 class="chart-title">2020 Staff Performance Score Results</h6>
+											</div>
+										</div>
+									</div>						
+								</div>								
+								<div class="col-lg-8 col-md-8">										
+									<div class="row placeholders mb-2">
+										<div class="col-12 text-center">
+											<div class="placeholder text-center">
+												<div class="bar-chart">
+													<div class="spinner" id="mySpinnerB5"></div>
+													<canvas id="perfScoreByDept-barChart" width="750" height="440"></canvas>
+												</div>
+												<h6 class="chart-title">Current Staff Performance Scores By Department</h6>
+											</div>
+										</div>
+									</div>	
+								</div>
+							</div>
+						</div>
+					</div>	
+					<!--/Tab3-->
 				</div>
-				<!--/row-->
-				
+		
 			</div>
 			<!--/main col ends-->
 		</div>
@@ -96,3 +77,22 @@
 	<!--/.container-->
 {% endblock %}
 
+
+{% block deptCharts-script %}
+	{% include "departments/dept_js.html" with requestor_list=requestor_list priority_list=priority_list case_avg=case_avg scores_info=scores_info dissatisfied_info=dissatisfied_info unknown_info=unknown_info %}
+
+	var perfScores = {{ perfScore_count|safe }};
+	var perfScoreLabels = Object.keys(perfScores);
+	var perfScoreData = Object.values(perfScores);
+
+	var perfScoreCountsByDept = {{ perfScoreByDept_count|safe }};
+	var perfScoreCountsByDeptLabels = Object.keys(perfScoreCountsByDept);
+	var perfScoreCountsByDeptObjVal = Object.values(perfScoreCountsByDept);
+	var perfScoreCountsByDeptData = formatHorizontalBarChartData(perfScoreCountsByDeptObjVal, perfScoreLabels);	
+	
+	function talentDeptOnlyCharts() {
+		pie_graph('perfScore-pieChart', perfScoreLabels, perfScoreData, 'Score Total', scheme4_colors, donutGraph_options2);
+		hbar_graph1('perfScoreByDept-barChart', perfScoreCountsByDeptLabels, perfScoreCountsByDeptData, perfScoreLabels, poolColors(perfScoreCountsByDeptLabels.length), blue_menu_color, horizStackedBarGraph_options3)
+	}
+	startTalentChartsTimeOut();
+{% endblock %}

@@ -1,9 +1,9 @@
 from accounts.models import HRTeamUser
-from departments.models import EmployeeData, HrCasesData, ProductionStaff, RecruitingCosts2018, SalaryGrid2019, TimeToFill5Yrs, WorkSiteLocations
+from departments.models import EmployeeData, HrCasesData, RecruitingCosts2019, SalaryGrid2020, WorkSiteLocations
 
 class HRDataRouter(object): 
     def db_for_read(self, model, **hints):
-        if model in (HRTeamUser, EmployeeData, HrCasesData, ProductionStaff, RecruitingCosts2018, SalaryGrid2019, TimeToFill5Yrs, WorkSiteLocations):
+        if model in (HRTeamUser, EmployeeData, HrCasesData, RecruitingCosts2019, SalaryGrid2020, WorkSiteLocations):
             return 'hr_data'
 
     def db_for_write(self, model, **hints):

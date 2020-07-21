@@ -78,6 +78,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+hr2_env/
 
 # mypy
 .mypy_cache/

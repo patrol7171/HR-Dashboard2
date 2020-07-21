@@ -1,0 +1,71 @@
+
+	var typeValues = {{ requestor_list|safe }};
+	var levelValues = {{ priority_list|safe }};
+	var caseAvgValues = {{ case_avg|safe }};
+	var scoreValuesByYear = {{ scores_info|safe }};
+	var dissatisfiedValues = {{ dissatisfied_info|safe }};
+	var unknownValues = {{ unknown_info|safe }};
+	
+	
+	
+	var graphNums1 = Object.values(typeValues);
+	var labelName1 = 'Requestor Type';
+	var arr1 = Object.keys(typeValues);
+	var labelList1 = arr1.map((element, index, array) => {
+		return element.substr(4);
+	});	
+	
+	var graphNums2 = Object.values(levelValues);
+	var labelName2 = 'Priority Level';
+	var arr2 = Object.keys(levelValues);
+	var labelList2 = arr2.map((element, index, array) => {
+		return element.substr(4);
+	});	
+	
+	var graphNums3 = Object.values(caseAvgValues);
+	var labelList3 = Object.keys(caseAvgValues);
+	var labelName3 = '2020';
+	
+	var scores = Object.values(scoreValuesByYear);
+	var graphNums4a = [scores[0]['0 - Unknown'],scores[0]['1 - Unsatisfied'],scores[0]['2 - Satisfied'],scores[0]['3 - Highly satisfied']];
+	var graphNums4b = [scores[1]['0 - Unknown'],scores[1]['1 - Unsatisfied'],scores[1]['2 - Satisfied'],scores[1]['3 - Highly satisfied']];
+	var graphNums4c = [scores[2]['0 - Unknown'],scores[2]['1 - Unsatisfied'],scores[2]['2 - Satisfied'],scores[2]['3 - Highly satisfied']];
+	var graphNums4d = [scores[3]['0 - Unknown'],scores[3]['1 - Unsatisfied'],scores[3]['2 - Satisfied'],scores[3]['3 - Highly satisfied']];	
+	var labelNames4 = Object.keys(scoreValuesByYear);
+	var labelList4 = scoreLabels;
+	
+	var dTypes = Object.values(dissatisfiedValues);
+	var dt1 = [dTypes[0]['1 - Intern'], dTypes[1]['1 - Intern'], dTypes[2]['1 - Intern'], dTypes[3]['1 - Intern'], dTypes[4]['1 - Intern']];
+	var dt2 = [dTypes[0]['2 - Regular'], dTypes[1]['2 - Regular'], dTypes[2]['2 - Regular'], dTypes[3]['2 - Regular'], dTypes[4]['2 - Regular']];
+	var dt3 = [dTypes[0]['3 - Non-staff'], dTypes[1]['3 - Non-staff'], dTypes[2]['3 - Non-staff'], dTypes[3]['3 - Non-staff'], dTypes[4]['3 - Non-staff']];
+	var dt4 = [dTypes[0]['4 - Management'], dTypes[1]['4 - Management'], dTypes[2]['4 - Management'], dTypes[3]['4 - Management'], dTypes[4]['4 - Management']];
+	var graphNums5 = [];
+	graphNums5.push(dt1,dt2,dt3,dt4);
+	var labelList5 = Object.keys(dissatisfiedValues);
+	var labelNames5 = requestorLabels;
+	
+	var uTypes = Object.values(unknownValues);
+	var ut1 = [uTypes[0]['1 - Intern'], uTypes[1]['1 - Intern'], uTypes[2]['1 - Intern'], uTypes[3]['1 - Intern'], uTypes[4]['1 - Intern']];
+	var ut2 = [uTypes[0]['2 - Regular'], uTypes[1]['2 - Regular'], uTypes[2]['2 - Regular'], uTypes[3]['2 - Regular'], uTypes[4]['2 - Regular']];
+	var ut3 = [uTypes[0]['3 - Non-staff'], uTypes[1]['3 - Non-staff'], uTypes[2]['3 - Non-staff'], uTypes[3]['3 - Non-staff'], uTypes[4]['3 - Non-staff']];
+	var ut4 = [uTypes[0]['4 - Management'], uTypes[1]['4 - Management'], uTypes[2]['4 - Management'], uTypes[3]['4 - Management'], uTypes[4]['4 - Management']];
+	var graphNums6 = [];
+	graphNums6.push(ut1,ut2,ut3,ut4);	
+	var labelList6 = Object.keys(unknownValues);	
+	var labelNames6 = requestorLabels;	
+	
+	
+
+	pie_graph('pieChart1', labelList1, graphNums1, labelName1, scheme1_colors, donutGraph_options3);
+	pie_graph('pieChart2', labelList2, graphNums2, labelName2, scheme2_colors, donutGraph_options3);
+	line_graph1('lineChart1', labelList3, graphNums3, labelName3, line1_color);
+	
+	function allSurveyCharts() {
+		pie_graph('pieChart4a', labelList4, graphNums4a, labelNames4[0], satScore_colors, donutGraph_options1);
+		pie_graph('pieChart4b', labelList4, graphNums4b, labelNames4[1], satScore_colors, donutGraph_options1);
+		pie_graph('pieChart4c', labelList4, graphNums4c, labelNames4[2], satScore_colors, donutGraph_options1);	
+		pie_graph('pieChart4d', labelList4, graphNums4d, labelNames4[3], satScore_colors, donutGraph_options1);
+		hbar_graph1('barChart1', labelList5, graphNums5, labelNames5, scheme3_colors, dissatisfied_color, horizStackedBarGraph_options2);
+		hbar_graph1('barChart2', labelList6, graphNums6, labelNames6, scheme3_colors, unknown_color, horizStackedBarGraph_options2);			
+	}
+	startCSSurveyGraphsTimeOut();
