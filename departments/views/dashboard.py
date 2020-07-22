@@ -22,7 +22,10 @@ status2 = 'Escalated'
 
 
 def welcome(request):
-	return render(request, 'departments/welcome.html')
+    if request.user.is_authenticated:
+        return HttpResponseRedirect('dashboard')
+    else:    
+        return render(request, 'departments/welcome.html')
 
 
 def home(request):
@@ -53,6 +56,7 @@ def dashboard(request):
 
     #Set the case count start and end dates
     #***For this app, case statuses are manually updated weekly in the database to "Closed" in order to make case count appear realistic***
+    #***Case dates extend out to Jan 2025 for the purpose of allowing this app to run with case data up to that date.***
     startDate = currDT - datetime.timedelta(days=30)
     endDate = currDT 
 

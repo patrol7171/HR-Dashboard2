@@ -26,7 +26,7 @@ currentDateStr = currDT.strftime("%a, %b %d, %Y")
 year = currDT.year
 
 #Set the case count start and end dates
-#***For this app, case statuses are manually updated weekly in the database to "Closed" in order to make the case status counts appear realistic***
+##*** For this app, case statuses are manually updated weekly in the database to "Closed" in order to make the case status counts appear realistic ***
 startDate = currDT - datetime.timedelta(days=30)
 endDate = currDT 
 yearStartDate = datetime.datetime(year, 1, 1)
@@ -48,12 +48,7 @@ trainDev = 'Training & Development'
 @login_required
 def attrition(request, tabnum):
     global attrRet
-    if tabnum == 1:
-        activeTab = "casework_tab"
-    elif tabnum == 2:
-        activeTab = "cssurveys_tab"       
-    else:
-        activeTab = "teamdata_tab"        
+    activeTab = getTabType(tabnum)
     casework_data = getCaseworkInfo(attrRet,request)
     cssurvey_data = getCSSurveyInfo(attrRet)
     rft = EmployeeData.rftCount.rft_count()
@@ -72,12 +67,7 @@ def attrition(request, tabnum):
 @login_required
 def compensation(request, tabnum):
     global beneComp
-    if tabnum == 1:
-        activeTab = "casework_tab"
-    elif tabnum == 2:
-        activeTab = "cssurveys_tab"       
-    else:
-        activeTab = "teamdata_tab"
+    activeTab = getTabType(tabnum)
     casework_data = getCaseworkInfo(beneComp,request)
     cssurvey_data = getCSSurveyInfo(beneComp)
     payDistrib_dept = EmployeeData.hourlyPayDistribByDept.pay_distrib()
@@ -95,12 +85,7 @@ def compensation(request, tabnum):
 @login_required
 def recruitment(request, tabnum):
     global recrSel
-    if tabnum == 1:
-        activeTab = "casework_tab"
-    elif tabnum == 2:
-        activeTab = "cssurveys_tab"       
-    else:
-        activeTab = "teamdata_tab"    
+    activeTab = getTabType(tabnum)
     casework_data = getCaseworkInfo(recrSel,request)
     cssurvey_data = getCSSurveyInfo(recrSel)    
     rec2019_costs = RecruitingCosts2019.recruit2019Costs.costs()
@@ -117,12 +102,7 @@ def recruitment(request, tabnum):
 @login_required
 def relations(request, tabnum):
     global emplRel
-    if tabnum == 1:
-        activeTab = "casework_tab"
-    elif tabnum == 2:
-        activeTab = "cssurveys_tab"       
-    else:
-        activeTab = "teamdata_tab"    
+    activeTab = getTabType(tabnum)   
     casework_data = getCaseworkInfo(emplRel,request)
     cssurvey_data = getCSSurveyInfo(emplRel)   
     engSurvey_results = EmployeeData.engageSurveyResultsByDept.dept_results()
@@ -139,12 +119,7 @@ def relations(request, tabnum):
 @login_required
 def talent(request, tabnum):
     global trainDev
-    if tabnum == 1:
-        activeTab = "casework_tab"
-    elif tabnum == 2:
-        activeTab = "cssurveys_tab"       
-    else:
-        activeTab = "teamdata_tab"    
+    activeTab = getTabType(tabnum)
     casework_data = getCaseworkInfo(trainDev,request)
     cssurvey_data = getCSSurveyInfo(trainDev)
     perfScore_count = EmployeeData.perfScoreCount.perf_scores()
@@ -156,6 +131,16 @@ def talent(request, tabnum):
     "perfScore_count":perfScore_count,"perfScoreByDept_count":perfScoreByDept_count}
     
     return render(request, 'departments/talent.html', context)
+
+
+def getTabType(num):
+    if num == 1:
+        tab = "casework_tab"
+    elif num == 2:
+        tab = "cssurveys_tab"       
+    else:
+        tab = "teamdata_tab" 
+    return tab
 
 
 def getCaseworkInfo(team,request):
