@@ -15,7 +15,6 @@ gunicorn==20.0.4
 idna==2.7
 jellyfish==0.6.1
 jmespath==0.10.0
-mysqlclient @ file:///HR-Dashboard2/mysqlclient-1.4.6-cp38-cp38-win_amd64.whl
 numpy==1.18.4
 pandas==1.0.3
 pathspec==0.5.9
