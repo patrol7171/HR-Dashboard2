@@ -22,8 +22,8 @@ else: # For Heroku only
     GEOCODIO_API_KEY = os.environ.get('Geocodio-API-Key')
     MAPBOX_API_KEY = os.environ.get('Mapbox-API-Key')
     ADMIN_PSWD = os.environ.get('Admin-Pswd')
-    DATABASES['default'] = os.environ.get(JAWSDB_URL)
-    DATABASES['hr_data'] = os.environ.get(HEROKU_POSTGRESQL_ORANGE_URL)
+    DATABASES['default'] = os.environ.get('JAWSDB_URL')
+    DATABASES['hr_data'] = os.environ.get('HEROKU_POSTGRESQL_ORANGE_URL')
 
 DEBUG = True
 ALLOWED_HOSTS = ['HR-Dashboard2.herokuapp.com']
