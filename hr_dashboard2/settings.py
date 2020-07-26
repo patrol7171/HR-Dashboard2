@@ -13,11 +13,12 @@ import dotenv
 
 # Environment paths 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-dotenv_file = os.path.join(BASE_DIR, ".env")
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
+dotenv_file = os.path.join(BASE_DIR, ".env")
 if os.path.isfile(dotenv_file):
     dotenv.load_dotenv(dotenv_file)
-else: # For Heroku only   
+else: # For Heroku only ->
     SECRET_KEY = os.environ.get('App-Secret-Key')
     GEOCODIO_API_KEY = os.environ.get('Geocodio-API-Key')
     MAPBOX_API_KEY = os.environ.get('Mapbox-API-Key')
@@ -36,6 +37,7 @@ ALLOWED_HOSTS = ['HR-Dashboard2.herokuapp.com']
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 DATABASE_ROUTERS = ['hr_dashboard2.dbrouter.HRDataRouter',]
+
 
 
 # Application definition
@@ -91,6 +93,7 @@ TEMPLATES = [
 ]
 
 
+
 WSGI_APPLICATION = 'hr_dashboard2.wsgi.application'
 
 
@@ -130,12 +133,16 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+
 
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
@@ -150,3 +157,5 @@ AUTHENTICATION_BACKENDS = [
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
 
+
+django_heroku.settings(locals())
