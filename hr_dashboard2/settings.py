@@ -25,7 +25,7 @@ else: # For Heroku only ->
     ADMIN_PSWD = os.environ.get('Admin-Pswd')
     DATABASES = {}
     DATABASES['default'] = os.environ.get('JAWSDB_URL')
-    DATABASES['hr_data'] = os.environ.get('HEROKU_POSTGRESQL_ORANGE_URL')
+    DATABASES['hr_data'] = os.environ.get('ELEPHANT_SQL_URL')
 
 
 
@@ -158,4 +158,3 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 
 
 
-django_heroku.settings(locals())
