@@ -3,6 +3,7 @@ import datetime
 import copy
 import collections
 import us
+from django.conf import settings
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import generic, View
@@ -16,8 +17,10 @@ from collections import defaultdict
 from datetime import timedelta
 from departments.forms import SiteDropDownForm
 from departments.models import EmployeeData, WorkSiteLocations
-from config import GEOCODIO_API_KEY, MAPBOX_API_KEY
 from geocodio import GeocodioClient
+
+GEOCODIO_API_KEY = settings.GEOCODIO_API_KEY
+MAPBOX_API_KEY = settings.MAPBOX_API_KEY
 
 
 
