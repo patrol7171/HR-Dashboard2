@@ -27,13 +27,15 @@ else: # *** For Heroku only ***
     SECRET_KEY = os.environ.get('App-Secret-Key')
     ADMIN_PSWD = os.environ.get('Admin-Pswd')
     GEOCODIO_API_KEY = os.environ.get('Geocodio-API-Key')
-    MAPBOX_API_KEY = os.environ.get('Mapbox-API-Key')    
+    MAPBOX_API_KEY = os.environ.get('Mapbox-API-Key')
+    JAWSDB_PSWD = os.environ.get('Jaws-DB-MySQL-Pswd')
+    PGSQL_PSWD = os.environ.get('Elephant-SQL-Pswd')
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
             'NAME':  'u7q2wl2obb7evh1n',                  
             'USER': 'rezbtjsmxz1pmvji',
-            'PASSWORD': 'cqncgcjb4ma0r349',
+            'PASSWORD': JAWSDB_PSWD,
             'HOST': 'ol5tz0yvwp930510.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
             'PORT': '3306',
         },
@@ -41,7 +43,7 @@ else: # *** For Heroku only ***
             'ENGINE': 'django.db.backends.postgresql',
             'NAME':  'ebjjixcv',                  
             'USER': 'ebjjixcv',
-            'PASSWORD': 'WvHOvTGbOReRZlUshx8gWp7S6ovr-uSh',
+            'PASSWORD': PGSQL_PSWD,
             'HOST': 'ruby.db.elephantsql.com',
             'PORT': '5432',
         }
