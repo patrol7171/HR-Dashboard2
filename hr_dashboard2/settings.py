@@ -28,15 +28,15 @@ else: # *** For Heroku only ***
     ADMIN_PSWD = os.environ.get('Admin-Pswd')
     GEOCODIO_API_KEY = os.environ.get('Geocodio-API-Key')
     MAPBOX_API_KEY = os.environ.get('Mapbox-API-Key')
-    JAWSDB_PSWD = os.environ.get('Jaws-DB-MySQL-Pswd')
+    MYSQLDB_PSWD = os.environ.get('AwardSpace-MySQL-DB-Pswd')
     PGSQL_PSWD = os.environ.get('Elephant-SQL-Pswd')
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME':  'u7q2wl2obb7evh1n',                  
-            'USER': 'rezbtjsmxz1pmvji',
-            'PASSWORD': JAWSDB_PSWD,
-            'HOST': 'ol5tz0yvwp930510.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
+            'NAME':  '3525064_hrportal2db',                  
+            'USER': '3525064_hrportal2db',
+            'PASSWORD': MYSQLDB_PSWD,
+            'HOST': 'fdb29.awardspace.net',
             'PORT': '3306',
         },
         'hr_data': {
