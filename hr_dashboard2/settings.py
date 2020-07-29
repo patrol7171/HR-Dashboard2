@@ -28,24 +28,24 @@ else: # *** For Heroku only ***
     ADMIN_PSWD = os.environ.get('Admin-Pswd')
     GEOCODIO_API_KEY = os.environ.get('Geocodio-API-Key')
     MAPBOX_API_KEY = os.environ.get('Mapbox-API-Key')
-    MYSQLDB_PSWD = os.environ.get('AwardSpace-MySQL-DB-Pswd')
+    MYSQLDB_PSWD = os.environ.get('Gearhost-MySQL-Pswd')
     PGSQL_PSWD = os.environ.get('Elephant-SQL-Pswd')
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME':  '3525064_hrportal2db',                  
-            'USER': '3525064_hrportal2db',
-            'PASSWORD': MYSQLDB_PSWD,
-            'HOST': 'fdb29.awardspace.net',
-            'PORT': '3306',
+            'ENGINE':'django.db.backends.mysql',
+            'NAME':'hrportal2db',                  
+            'USER':'hrportal2db',
+            'PASSWORD':MYSQLDB_PSWD,
+            'HOST':'den1.mysql1.gear.host',
+            'PORT':'3306',
         },
         'hr_data': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME':  'ebjjixcv',                  
-            'USER': 'ebjjixcv',
-            'PASSWORD': PGSQL_PSWD,
-            'HOST': 'ruby.db.elephantsql.com',
-            'PORT': '5432',
+            'ENGINE':'django.db.backends.postgresql',
+            'NAME':'ebjjixcv',                  
+            'USER':'ebjjixcv',
+            'PASSWORD':PGSQL_PSWD,
+            'HOST':'ruby.db.elephantsql.com',
+            'PORT':'5432',
         }
     }
 
