@@ -7,7 +7,7 @@ from django.db.models import F, Q, Count, Value, Avg
 from django.contrib.admin.utils import flatten
 from collections import OrderedDict, defaultdict
 from datetime import date, timedelta
-from calendar import month_name
+from calendar import month_abbr
 from decimal import Decimal
 from collections import ChainMap
 from accounts.models import HRTeamUser
@@ -372,8 +372,8 @@ class TeamCurrentAvgCaseCloseNumPerMonthManager(models.Manager):
     def avg_count(self, team, startDate, endDate):
         results = super().get_queryset().filter(Q(casetype=team) & Q(datereceived__range=(startDate, endDate))).values_list('datereceived__month').annotate(avg_days=Avg(F('dateclosed__date') - F('datereceived__date')))
         resList = list(results)
-        convertedList = [(calendar.month_name[num], avg.days) for num, avg in resList]
-        months = list(month_name)
+        convertedList = [(calendar.month_abbr[num], avg.days) for num, avg in resList]
+        months = list(month_abbr)
         finalList = sorted(convertedList, key = lambda i: months.index(i[0]))
         months = [i[0] for i in finalList]
         averages = [i[1] for i in finalList]

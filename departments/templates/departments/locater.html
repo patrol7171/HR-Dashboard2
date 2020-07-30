@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block heading %}
-	<h6 class='mt-2'>EMPLOYEE / SITE LOCATER</h6>
+	<h6 class='mt-2 font-weight-bold'>EMPLOYEE / SITE LOCATER</h6>
 {% endblock %}
 
 {% block content %}
@@ -32,7 +32,7 @@
 								<div class="col-lg-3 col-md-4 col-sm-12 mt-2">
 									<div class="card">
 										<div class="card-body">
-											<h6 class="card-title">WORK GROUPS LIST</h6>
+											<h6 class="text-muted text-uppercase">work groups list</h6>
 											<form method="POST" action="{% url 'locater' 1 %}">
 												{% csrf_token %}
 												<small>{{ form1.as_p }}</small>
@@ -43,16 +43,16 @@
 								</div>								
 								<div class="col-lg-9 col-md-8 col-sm-12 mt-2">
 									<div class="row">	
-									<p class="card-title">CURRENT EMPLOYEES IN THIS WORK GROUP:</p>
+									<span class="text-muted text-uppercase lead">current employees in this work group:</span>
 										<div class="table-responsive">
 											<table class="table table-sm table-striped">
-												<thead class="thead-inverse">
+												<thead class="thead-inverse text-muted text-uppercase">
 													<tr>
-														<th><small><b>ID#</b></small></th>
-														<th><small><b>Employee Name</b></small></th>
-														<th><small><b>Department</b></small></th>
-														<th><small><b>Position</b></small></th>
-														<th><small><b>Employment Status</b></small></th>
+														<th><small>ID#</small></th>
+														<th><small>Employee Name</small></th>
+														<th><small>Department</small></th>
+														<th><small>Position</small></th>
+														<th><small>Employment Status</small></th>
 													</tr>
 												</thead>
 												<tbody>												
@@ -81,7 +81,7 @@
 							<div class="col-lg-4 col-md-5 col-sm-12 mt-2">
 								<div class="card">
 									<div class="card-body">
-										<h5 class="card-title">WORK SITE LOCATIONS</h5>
+										<h5 class="text-muted text-uppercase">work site locations</h5>
 										<div class="list-group" id="siteList2" role="tablist">
 										{% for site in sitesList %}
 											{% if site.worksiteid == 1 %}
@@ -107,7 +107,7 @@
 												<div class="card card-inverse card-danger text-center">
 													<div class="card-body">
 														<img src="/static/{{ site.image }}" class="mx-auto img-fluid"><br>
-														<lead>{{ site.sitename }}</lead><br>
+														<span class="lead">{{ site.sitename }}</span><br>
 														<small>{{ site.address }}</small> | 
 														<small>{{ site.city }}, {{ site.state }} {{ site.zipcode }}</small> | 
 														<small>{{ site.mainphone }}</small>
@@ -130,7 +130,7 @@
 								<div class="row-fluid">
 									<div class="card mt-1">
 										<div class="card-body">											
-											<h6 class="card-title">EMPLOYEE LOCATIONS *</h6>
+											<h6 class="text-muted text-uppercase">employee locations *</h6>
 											<div class="list-group" id="stateList" role="tablist">
 											{% for state in state_list %}
 												{% if forloop.first %}
@@ -144,7 +144,7 @@
 									</div>		
 									<div class="card card-inverse bg-inverse mt-1">
 										<div class="card-body">
-											<h6 class="card-title">MARKER LEGEND</h6>
+											<h6 class="text-muted text-uppercase">marker legend</h6>
 											<div class="table-responsive">
 												<table id="marker-legend" class="table table-sm">
 													<tbody>												
