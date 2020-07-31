@@ -1,5 +1,6 @@
 import calendar
 import datetime
+import pytz
 from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import Group
@@ -492,14 +493,14 @@ class HrCasesData(models.Model):
         return name
 
     def is_out_of_SLA(tier, rcvdDate):
-        newDT = rcvdDate.replace(tzinfo=None)
+        newDT = rcvdDate.replace(tzinfo=pytz.utc)
         if tier == "Tier 1":
-            max_SLA_date = datetime.datetime.now() - datetime.timedelta(days=2)           
+            max_SLA_date = (datetime.datetime.now() - datetime.timedelta(days=2)).replace(tzinfo=pytz.utc)    
             if max_SLA_date < newDT:
                 return False
             return True
         else:
-            max_SLA_date = datetime.datetime.now() - datetime.timedelta(days=4)
+            max_SLA_date = (datetime.datetime.now() - datetime.timedelta(days=4)).replace(tzinfo=pytz.utc)
             if max_SLA_date < newDT:
                 return False
             return True       
