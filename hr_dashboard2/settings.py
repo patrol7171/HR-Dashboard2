@@ -51,7 +51,9 @@ else: # *** For Heroku only ***
 
 
 
-DEBUG = True
+DEBUG = False
+
+DEBUG_PROPAGATE_EXCEPTIONS = True
 
 ALLOWED_HOSTS = ['hr-portal2.herokuapp.com']
 
