@@ -1,5 +1,6 @@
 import requests
 import datetime
+import pytz
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import generic, View
@@ -44,19 +45,19 @@ def about(request):
 @login_required
 def dashboard(request):
     global status1, status2
-    #Set current date
-    currDT = datetime.datetime.now()
+    #Set current date with local time zone
+    currDT = (datetime.datetime.now()).replace(tzinfo=pytz.utc)
     currentDateStr = currDT.strftime("%a, %b %d, %Y")
 
     #Set Tier 1 SLA max time period from initial case creation -- 2 days
-    twoDaysAgoDate = currDT - datetime.timedelta(days=2)	
+    twoDaysAgoDate = currDT - datetime.timedelta(days=2)
 
     #Set Tier 2 SLA max time period from initial case creation -- 4 days	
     fourDaysAgoDate = currDT - datetime.timedelta(days=4)
 
     #Set the case count start and end dates
     #***For this app, case statuses are manually updated weekly in the database to "Closed" in order to make case count appear realistic***
-    #***Case dates extend out to Jan 2025 for the purpose of allowing this app to run with case data up to that date.***
+    #***Case dates extend out to Jan 2024 to allow this app to run with case data up to that date; start date is 30 days prior to the current date***
     startDate = currDT - datetime.timedelta(days=30)
     endDate = currDT 
 
@@ -121,8 +122,8 @@ def dashboard(request):
         attrRetTeamOldCaseTotal = get_case_total_by_SLA(attrRet, startDate, twoDaysAgoDate, fourDaysAgoDate)
         beneCompTeamOldCaseTotal = get_case_total_by_SLA(beneComp, startDate, twoDaysAgoDate, fourDaysAgoDate)
         emplRelTeamOldCaseTotal = get_case_total_by_SLA(emplRel, startDate, twoDaysAgoDate, fourDaysAgoDate)
-        recrSelTeamOldCaseTotal = get_case_total_by_SLA(attrRet, startDate, twoDaysAgoDate, fourDaysAgoDate)
-        trainDevTeamOldCaseTotal = get_case_total_by_SLA(attrRet, startDate, twoDaysAgoDate, fourDaysAgoDate)
+        recrSelTeamOldCaseTotal = get_case_total_by_SLA(recrSel, startDate, twoDaysAgoDate, fourDaysAgoDate)
+        trainDevTeamOldCaseTotal = get_case_total_by_SLA(trainDev, startDate, twoDaysAgoDate, fourDaysAgoDate)
 
         #Determine the total of all open Tier 1 cases per team
         attrRetTeamT1CaseCount = get_case_total_by_tier(attrRet, status1, startDate, endDate)
@@ -130,7 +131,7 @@ def dashboard(request):
         emplRelTeamT1CaseCount = get_case_total_by_tier(emplRel, status1, startDate, endDate)
         recrSelTeamT1CaseCount = get_case_total_by_tier(recrSel, status1, startDate, endDate)
         trainDevTeamT1CaseCount = get_case_total_by_tier(trainDev, status1, startDate, endDate)
-
+        
         #Determine the total of all open Tier 2 cases per team
         attrRetTeamT2CaseCount = get_case_total_by_tier(attrRet, status2, startDate, endDate)
         beneCompTeamT2CaseCount = get_case_total_by_tier(beneComp, status2, startDate, endDate)
@@ -143,15 +144,15 @@ def dashboard(request):
         beneCompTeamCaseCount = beneCompTeamT1CaseCount + beneCompTeamT2CaseCount
         emplRelTeamCaseCount = emplRelTeamT1CaseCount + emplRelTeamT2CaseCount
         recrSelTeamCaseCount = recrSelTeamT1CaseCount + recrSelTeamT2CaseCount
-        trainDevTeamCaseCount = trainDevTeamT1CaseCount + trainDevTeamT2CaseCount	
+        trainDevTeamCaseCount = trainDevTeamT1CaseCount + trainDevTeamT2CaseCount
 
         #Calculate each team's good SLA percentage of cases
         attrRetTeamGoodSLAPercentage = get_SLA_percentage(attrRetTeamOldCaseTotal, attrRetTeamCaseCount)
         beneCompTeamGoodSLAPercentage = get_SLA_percentage(beneCompTeamOldCaseTotal, beneCompTeamCaseCount)
         emplRelTeamGoodSLAPercentage = get_SLA_percentage(emplRelTeamOldCaseTotal, emplRelTeamCaseCount)
         recrSelTeamGoodSLAPercentage = get_SLA_percentage(recrSelTeamOldCaseTotal, recrSelTeamCaseCount)
-        trainDevTeamGoodSLAPercentage = get_SLA_percentage(trainDevTeamOldCaseTotal, trainDevTeamCaseCount)	
-            
+        trainDevTeamGoodSLAPercentage = get_SLA_percentage(trainDevTeamOldCaseTotal, trainDevTeamCaseCount)	       
+                    
         #Get satisfaction scores data for all teams
         scoreValuesB = HrCasesData.allTeamsScores.score_count(yearStartDate, endDate)
 
@@ -159,7 +160,7 @@ def dashboard(request):
         tier1Values = [attrRetTeamT1CaseCount, beneCompTeamT1CaseCount, emplRelTeamT1CaseCount, recrSelTeamT1CaseCount, trainDevTeamT1CaseCount]
         tier2Values = [attrRetTeamT2CaseCount, beneCompTeamT2CaseCount, emplRelTeamT2CaseCount, recrSelTeamT2CaseCount, trainDevTeamT2CaseCount]
         tierTotalValues = [attrRetTeamCaseCount, beneCompTeamCaseCount, emplRelTeamCaseCount, recrSelTeamCaseCount, trainDevTeamCaseCount]
-        gaugeValuesB = [attrRetTeamGoodSLAPercentage, beneCompTeamGoodSLAPercentage, emplRelTeamGoodSLAPercentage, recrSelTeamGoodSLAPercentage, trainDevTeamGoodSLAPercentage]	
+        gaugeValuesB = [attrRetTeamGoodSLAPercentage, beneCompTeamGoodSLAPercentage, emplRelTeamGoodSLAPercentage, recrSelTeamGoodSLAPercentage, trainDevTeamGoodSLAPercentage]
                     
         context = {"currentDate":currentDateStr,"dashboard_page":"active","tier1Values":tier1Values,"tier2Values":tier2Values,"tierTotalValues":tierTotalValues,"gaugeValues":gaugeValuesB, "scoreValues":scoreValuesB}	
         return render(request, 'departments/dashboardB.html', context)
