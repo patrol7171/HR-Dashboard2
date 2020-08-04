@@ -567,13 +567,14 @@ table#marker-legend.table.table-sm {
     FOOTER STYLE
 ----------------------------------------------------- */
 footer {
+	position: -webkit-sticky;
+	position: sticky;	
     width: 100% !important;
-    position: fixed !important;
     left: 0 !important;
     bottom: 0 !important;
     background-color: #525354 !important;
-    color: white !important;
-  }
+    color: #fff !important;
+}
   
 footer a:hover{
     color: #69DC00 !important;
@@ -591,52 +592,50 @@ footer p{
 ----------------------------------------------------- */
 /* Off Canvas wider at sm breakpoint */
 @media screen (max-width: 34em) {
-  .row-offcanvas-left
-  .sidebar-offcanvas {
-    left: -45%;
-  }
+	.row-offcanvas-left
+	.sidebar-offcanvas {
+		left: -45%;	
+	}
 
-  .row-offcanvas-left.active {
-    left: 45%;
-    margin-left: -6px;
-  }
-  
-  .sidebar-offcanvas {
-    width: 45%;
-  }
+	.row-offcanvas-left.active {
+		left: 45%;
+		margin-left: -6px;
+	}
+
+	.sidebar-offcanvas {
+		width: 45%;
+	}
 }
 
 /* Off Canvas sidebar at medium breakpoint */
 @media screen (max-width: 992px) {
+	.row-offcanvas {
+		position: relative;
+		-webkit-transition: all 0.25s ease-out;
+		-moz-transition: all 0.25s ease-out;
+		transition: all 0.25s ease-out;
+	}
 
-  .row-offcanvas {
-    position: relative;
-    -webkit-transition: all 0.25s ease-out;
-    -moz-transition: all 0.25s ease-out;
-    transition: all 0.25s ease-out;
-  }
+	.row-offcanvas-left
+	.sidebar-offcanvas {
+		left: -33%;
+	}
 
-  .row-offcanvas-left
-  .sidebar-offcanvas {
-    left: -33%;
-  }
+	.row-offcanvas-left.active {
+		left: 33%;
+		margin-left: -6px;
+	}
 
-  .row-offcanvas-left.active {
-    left: 33%;
-    margin-left: -6px;
-  }
-
-  .sidebar-offcanvas {
-    position: absolute;
-    top: 0;
-    width: 33%;
-    height: 100%;
-  }
+	.sidebar-offcanvas {
+		position: absolute;
+		top: 0;
+		width: 33%;
+		height: 100%;
+	}
 }
 
 
 @media (max-width: 768px) {
-
     #sidebar.active {
         margin-left: 0;
         transform: none;
@@ -694,7 +693,4 @@ footer p{
 	#sidebar .oi {
 		font-size: 1.5em;	 
 	}
-	
 }
-
-
