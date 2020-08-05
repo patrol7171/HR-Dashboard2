@@ -78,6 +78,7 @@ a.nav-link.active {
     width: 100%;
     align-items: stretch;
     perspective: 1500px;
+	padding-bottom: 70px !important;
 }
 
 #sidebar {
@@ -240,8 +241,9 @@ span.logo2
   
 #content {
     width: 90% !important;
-    padding: 20px;
+    padding: 26px !important;
     min-height: 88vh;
+	position:relative;
     transition: all 0.3s;
 }
 
@@ -567,15 +569,14 @@ table#marker-legend.table.table-sm {
     FOOTER STYLE
 ----------------------------------------------------- */
 footer {
-	position: -webkit-sticky;
-	position: sticky;	
+	position: fixed;
     width: 100% !important;
     left: 0 !important;
     bottom: 0 !important;
     background-color: #525354 !important;
     color: #fff !important;
 }
-  
+
 footer a:hover{
     color: #69DC00 !important;
 }
