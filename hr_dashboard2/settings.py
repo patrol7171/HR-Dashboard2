@@ -37,7 +37,7 @@ else: # *** For Heroku only ***
     PGSQL_PSWD = os.environ.get('Elephant-SQL-Pswd')
     AWS_ACCESS_KEY_ID = os.environ.get('S3_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = os.environ.get('S3_SECRET_ACCESS_KEY')
-    AWS_STORAGE_BUCKET_NAME = os.envioron.get('AWS_STORAGE_BUCKET_NAME')    
+    AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')    
     DATABASES = {
         'default': {
             'ENGINE':'django.db.backends.mysql',
