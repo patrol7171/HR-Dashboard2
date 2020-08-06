@@ -37,3 +37,5 @@ urllib3==1.24.3
 us==2.0.2
 wcwidth==0.1.9
 whitenoise==5.1.0
+boto3==1.14.35
+django-storages==1.9.1

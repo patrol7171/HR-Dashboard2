@@ -11,7 +11,7 @@ import dotenv
 
 
 
-# Environment paths 
+# Environment paths & configurations
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
@@ -23,7 +23,11 @@ if os.path.isfile(dotenv_file):
     ADMIN_PSWD = os.environ.get('ADMIN_PSWD')
     GEOCODIO_API_KEY = os.environ.get('GEOCODIO_API_KEY')
     MAPBOX_API_KEY = os.environ.get('MAPBOX_API_KEY')
+    AWS_ACCESS_KEY_ID = os.environ.get('S3_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = os.environ.get('S3_SECRET_ACCESS_KEY')
+    AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
     from config import DATABASES
+
 else: # *** For Heroku only *** 
     SECRET_KEY = os.environ.get('App-Secret-Key')
     ADMIN_PSWD = os.environ.get('Admin-Pswd')
@@ -31,6 +35,9 @@ else: # *** For Heroku only ***
     MAPBOX_API_KEY = os.environ.get('Mapbox-API-Key')
     MYSQLDB_PSWD = os.environ.get('Gearhost-MySQL-Pswd')
     PGSQL_PSWD = os.environ.get('Elephant-SQL-Pswd')
+    AWS_ACCESS_KEY_ID = os.environ.get('S3_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = os.environ.get('S3_SECRET_ACCESS_KEY')
+    AWS_STORAGE_BUCKET_NAME = os.envioron.get('AWS_STORAGE_BUCKET_NAME')    
     DATABASES = {
         'default': {
             'ENGINE':'django.db.backends.mysql',
@@ -50,11 +57,9 @@ else: # *** For Heroku only ***
         }
     }
 
+DEBUG = False
 
-
-DEBUG = True
-
-#DEBUG_PROPAGATE_EXCEPTIONS = True
+DEBUG_PROPAGATE_EXCEPTIONS = True
 
 ALLOWED_HOSTS = ['hr-portal2.herokuapp.com']
 
@@ -62,7 +67,7 @@ DATABASE_ROUTERS = ['hr_dashboard2.dbrouter.HRDataRouter']
 
 
 
-# Application definition
+# Application Definitions
 INSTALLED_APPS = [   
     'django.contrib.admin',
     'django.contrib.auth',
@@ -70,16 +75,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'storages',
     'accounts.apps.AccountsConfig',
     'departments.apps.DepartmentsConfig',
     'crispy_forms', 
 ]
 
-
-
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -92,11 +94,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-
-
 ROOT_URLCONF = 'hr_dashboard2.urls'
-
-
 
 TEMPLATES = [
     {
@@ -109,12 +107,11 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
 ]
-
-
 
 WSGI_APPLICATION = 'hr_dashboard2.wsgi.application'
 
@@ -155,22 +152,27 @@ USE_TZ = True
 
 # Static & Media files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+AWS_S3_REGION_NAME = 'us-east-1'
+AWS_DEFAULT_ACL = None
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_IS_GZIPPED = True
+AWS_S3_OBJECT_PARAMETERS = { 'CacheControl': 'max-age=86400' }
+
+MEDIA_URL = 'https://%s.s3.amazonaws.com/media/' % AWS_STORAGE_BUCKET_NAME
+MEDIA_ROOT = MEDIA_URL
+DEFAULT_FILE_STORAGE = 'hr_dashboard2.storage_backends.MediaStorage'
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-#STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
     os.path.join(BASE_DIR, 'departments/static'),
 )
-
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 
-# Authentication and Login info
+# Authentication & Login info
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 

@@ -4,6 +4,7 @@ from django.db import models
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.models import Group
 from PIL import Image
+from django.core.files.storage import default_storage as storage
 
 
 
@@ -92,11 +93,11 @@ class Profile(models.Model):
 
   def save(self, *args, **kwargs):
     super(Profile, self).save(*args, **kwargs)
-    img = Image.open(self.image.path)
+    img = Image.open(storage.open(self.image.name))    
     if img.height > 100 or img.width > 100:
         output_size = (100, 100)
         img.thumbnail(output_size)
-        img.save(self.image.path)
+        img.save(storage.open(self.image.name))
 
   class Meta:
     app_label = 'accounts'
