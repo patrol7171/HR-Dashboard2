@@ -174,7 +174,7 @@ def getOpenCasesListInfo(team,request):
     global startDate, endDate
     list = HrCasesData.teamOpenCasesList.case_list(team, startDate, endDate)   
     page = request.GET.get('page', 1)
-    paginator = Paginator(list, 10)
+    paginator = Paginator(list, 8)
     try:
         list = paginator.page(page)
     except PageNotAnInteger:
