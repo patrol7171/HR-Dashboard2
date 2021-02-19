@@ -389,12 +389,15 @@ class TeamOpenCaseListManager(models.Manager):
         return finalList
         		
 class TeamSatisfactionScoresManager(models.Manager):
-	def score_count(self, team, startDate, endDate):
-		result = super().get_queryset().filter(Q(casetype=team) & Q(casestatus='Closed') & Q(datereceived__range=(startDate, endDate))).values('satisfactionscore').annotate(count=Count('satisfactionscore'))
-		scoresList = list(result)
-		score_dicts = [{dict['satisfactionscore']: dict['count']} for dict in scoresList]
-		scores = {k: v for d in score_dicts for k, v in d.items()}
-		return scores
+    def score_count(self, team, startDate, endDate):
+        defaults = {'0 - Unknown':0,'1 - Unsatisfied':0,'2 - Satisfied':0,'3 - Highly satisfied':0}
+        result = super().get_queryset().filter(Q(casetype=team) & Q(casestatus='Closed') & Q(datereceived__range=(startDate, endDate))).values('satisfactionscore').annotate(count=Count('satisfactionscore'))
+        scoresList = list(result)
+        score_dicts = [{dict['satisfactionscore']: dict['count']} for dict in scoresList]
+        scores = {k: v for d in score_dicts for k, v in d.items()}
+        for key in defaults.keys():
+            scores.setdefault(key,0)        
+        return scores
 
 class TeamScoreCountByRequestorManager(models.Manager):
     def requestor_count(self, team, scoreType, startDate, endDate):
